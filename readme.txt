@@ -49,4 +49,3 @@ The Category Archives Block lets you show posts for one or more specific categor
 
 = 0.1.0 - March 26th 2021 =
 * Release
-

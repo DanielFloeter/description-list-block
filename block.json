@@ -1,7 +1,7 @@
 {
 	"apiVersion": 2,
 	"name": "description-list-block/description-list",
-	"title": "Starter Block",
+	"title": "Description List Block",
 	"category": "text",
 	"icon": "clipboard",
     "supports": {

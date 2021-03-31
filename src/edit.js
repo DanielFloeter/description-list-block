@@ -3,11 +3,12 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes }) {
+export default function Edit({ attributes: { list }, attributes, setAttributes }) {
 	const blockProps = useBlockProps();
 
+
 	// const { list } = attributes;
-	let { list } = {list: [
+	 list  =  [
 		{
 			content: __( '' ),
 			tag: 'dt',
@@ -28,7 +29,7 @@ export default function Edit({ attributes, setAttributes }) {
 			tag: 'dd',
 			placeholder: __('Description ...')
 		},
-	]};
+	];
 
 	return (
 		<dl {...blockProps}>
@@ -36,7 +37,7 @@ export default function Edit({ attributes, setAttributes }) {
 				<RichText
 					tagName={tag}
 					value={content}
-					onChange={(term) => setAttributes({ term })}
+					onChange={(value) => setAttributes({ content: value })}
 					placeholder={placeholder}
 				/>
 			)

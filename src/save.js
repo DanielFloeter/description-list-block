@@ -5,15 +5,17 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
 export default function save({ attributes }) {
 	const blockProps = useBlockProps.save();
 
+	const { list } = attributes;
+
 	return (
 		<dl {...blockProps} >
 			<RichText.Content
 				tagName="dt"
-				value={attributes.list.term}
+				value={list.term}
 			/>
 			<RichText.Content
 				tagName="dd"
-				value={attributes.list.description}
+				value={list.description}
 			/>
 		</dl>
 	);
