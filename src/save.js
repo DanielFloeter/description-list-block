@@ -3,20 +3,33 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
-	const blockProps = useBlockProps.save();
+
+//console.log("save", attributes);
 
 	const { list } = attributes;
 
+	const Section = ( { rows } ) => {
+		if ( ! rows.length ) {
+			return null;
+		}
+		
+		return (
+			rows.map(
+				({ content, tag, placeholder }, rowIndex) => {
+					<RichText.Content
+					tagName={tag}
+					value={content}
+					key={rowIndex}
+					/>
+				}
+			)
+		);
+	};
+
 	return (
-		<dl {...blockProps} >
-			<RichText.Content
-				tagName="dt"
-				value={list.term}
-			/>
-			<RichText.Content
-				tagName="dd"
-				value={list.description}
-			/>
+		<dl { ...useBlockProps.save() }>
+			<Section rows={ list } />
 		</dl>
 	);
 }
+
