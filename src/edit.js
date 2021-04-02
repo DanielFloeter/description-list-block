@@ -98,7 +98,7 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 	// 	},
 	// ];
 
-	console.log("attributs", attributes[ 'list' ]);
+//console.log("attributs", isEmpty, attributes[ 'list' ]);
 
 	return (
 		<dl {...blockProps}>
@@ -112,7 +112,7 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 							onChange={onChange}
 							unstableOnFocus={() => {
 								setSelectedCell({
-									sectionName: 'body',
+									sectionName: 'list',
 									rowIndex,
 									type: 'cell',
 								});

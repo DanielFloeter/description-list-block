@@ -48,41 +48,75 @@ export function updateSelectedCell(state, selection, updateCell) {
 		return state;
 	}
 
-	const tableSections = pick(state, ['head', 'body', 'foot']);
+	//const tableSections = pick(state, ['head', 'body', 'foot']);
+	const tableSections = pick(state, ['list']);
 	const {
 		sectionName: selectionSectionName,
 		rowIndex: selectionRowIndex,
 	} = selection;
 
-	//console.log("s", state.list);
+	
 	return mapValues(tableSections, (section, sectionName) => {
 		if (selectionSectionName && selectionSectionName !== sectionName) {
 			return section;
 		}
-
 
 		return section.map((row, rowIndex) => {
 			if (selectionRowIndex && selectionRowIndex !== rowIndex) {
 				return row;
 			}
 
-			return {
-				cells: row.cells.map((cellAttributes, columnIndex) => {
-					const cellLocation = {
-						sectionName,
-						columnIndex,
-						rowIndex,
-					};
-
-					if (!isCellSelected(cellLocation, selection)) {
-						return cellAttributes;
-					}
-
-					return updateCell(cellAttributes);
-				}),
+			const cellLocation = {
+				sectionName,
+				rowIndex,
 			};
+
+			if (!isCellSelected(cellLocation, selection)) {
+				return row;
+			}
+			
+			//console.log("s", row, updateCell(row) );
+
+			return updateCell(row);
+			
+
+			// return {
+			// 	cells: row.cells.map((cellAttributes, columnIndex) => {
+			// 		const cellLocation = {
+			// 			sectionName,
+			// 			rowIndex,
+			// 		};
+
+			// 		if (!isCellSelected(cellLocation, selection)) {
+			// 			return cellAttributes;
+			// 		}
+
+			// 		return updateCell(cellAttributes);
+			// 	}),
+			// };
 		});
 	});
+}
+
+/**
+ * Returns whether the cell at `cellLocation` is included in the selection `selection`.
+ *
+ * @param {Object} cellLocation An object containing cell location properties.
+ * @param {Object} selection    An object containing selection properties.
+ *
+ * @return {boolean} True if the cell is selected, false otherwise.
+ */
+ export function isCellSelected( cellLocation, selection ) {
+	if ( ! cellLocation || ! selection ) {
+		return false;
+	}
+
+	return (
+		selection.type === 'cell' &&
+		cellLocation.sectionName === selection.sectionName &&
+		cellLocation.rowIndex === selection.rowIndex
+	);
+
 }
 
 /**

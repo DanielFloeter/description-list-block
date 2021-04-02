@@ -15,11 +15,15 @@ export default function save({ attributes }) {
 		
 		return (
 			rows.map(
-				({ content, tag, placeholder }, rowIndex) => {
+				({ content, tag }, rowIndex) => {
+
+					console.log("save", content, tag, rowIndex);
+
+					return(
 					<RichText.Content
-					tagName={tag}
-					value={content}
-					key={rowIndex}
+						tagName={tag}
+						value={content}
+						key={rowIndex}
 					/>
 				}
 			)
