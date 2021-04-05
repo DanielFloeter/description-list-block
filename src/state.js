@@ -2,17 +2,17 @@
 /**
  * External dependencies
  */
-import { times, get, mapValues, every, pick } from 'lodash';
+import { times, mapValues, pick } from 'lodash';
 
 /**
- * Creates a table state.
+ * Creates a description list state.
  *
  * @param {Object} options
- * @param {number} options.rowCount    Row count for the table to create.
+ * @param {number} options.rowCount    Row count for the description list to create.
  *
- * @return {Object} New table state.
+ * @return {Object} New description list state.
  */
-export function createTable({ rowCount }) {
+export function createDescriptionList({ rowCount }) {
 	return {
 		list: times(rowCount * 2, (i) => {
 			if (0 === i % 2) {
@@ -32,11 +32,11 @@ export function createTable({ rowCount }) {
 }
 
 /**
- * Returns the first row in the table.
+ * Returns the first row in the description list.
  *
- * @param {Object} state Current table state.
+ * @param {Object} state Current description list state.
  *
- * @return {Object} The first table row.
+ * @return {Object} The first description list row.
  */
 export function getFirstRow(state) {
 	if (!isEmptyDescriptionList(state.list)) {
@@ -45,16 +45,16 @@ export function getFirstRow(state) {
 }
 
 /**
- * Inserts a row in the table state.
+ * Inserts a row in the description list state.
  *
- * @param {Object} state               Current table state.
+ * @param {Object} state               Current description list state.
  * @param {Object} options
  * @param {string} options.sectionName Section in which to insert the row.
  * @param {number} options.rowIndex    Row index at which to insert the row.
  *
- * @return {Object} New table state.
+ * @return {Object} New description list state.
  */
-export function insertRow(state, { sectionName, rowIndex }) {
+export function insertListPair(state, { sectionName, rowIndex }) {
 
 	return {
 		list: [
@@ -72,16 +72,16 @@ export function insertRow(state, { sectionName, rowIndex }) {
 }
 
 /**
- * Deletes a row from the table state.
+ * Deletes a row from the description list state.
  *
- * @param {Object} state               Current table state.
+ * @param {Object} state               Current description list state.
  * @param {Object} options
  * @param {string} options.sectionName Section in which to delete the row.
  * @param {number} options.rowIndex    Row index to delete.
  *
- * @return {Object} New table state.
+ * @return {Object} New description list state.
  */
- export function deleteRow( state, { sectionName, rowIndex } ) {
+ export function deleteListPair( state, { sectionName, rowIndex } ) {
 	const listPairIndex = rowIndex % 2 ? rowIndex - 1 : rowIndex + 1;
 
 	return {
@@ -98,7 +98,7 @@ export function insertRow(state, { sectionName, rowIndex }) {
  * @param {Object}   selection  The selection of cells to update.
  * @param {Function} updateCell A function to update the selected cell attributes.
  *
- * @return {Object} New table state including the updated cells.
+ * @return {Object} New description list state including the updated cells.
  */
 export function updateSelectedCell(state, selection, updateCell) {
 	if (!selection) {

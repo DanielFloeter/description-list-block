@@ -22,10 +22,10 @@ import {
 } from '@wordpress/block-editor';
 import './editor.scss';
 import {
-	createTable,
+	createDescriptionList,
 	updateSelectedCell,
-	insertRow,
-	deleteRow,
+	insertListPair,
+	deleteListPair,
 	isEmptyDescriptionList,
 } from './state';
 
@@ -40,7 +40,7 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 	};
 
 	/**
-	 * Updates the initial row count used for table creation.
+	 * Updates the initial row count used for description list creation.
 	 *
 	 * @param {number} count New initial row count.
 	 */
@@ -54,7 +54,7 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 	 *
 	 * @param {number} delta Offset for selected row index at which to insert.
 	 */
-	function onInsertRow(delta) {
+	function onInsertListPair(delta) {
 		if (!selectedCell) {
 			return;
 		}
@@ -64,12 +64,12 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 		const newRowIndex = listPairIndex + delta;
 
 		setAttributes(
-			insertRow(attributes, {
+			insertListPair(attributes, {
 				sectionName,
 				rowIndex: newRowIndex,
 			})
 		);
-		// Select the first cell of the new row
+		// Select the description list pair
 		setSelectedCell({
 			sectionName,
 			rowIndex: newRowIndex,
@@ -80,21 +80,21 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 	/**
 	 * Inserts a row before the currently selected row.
 	 */
-	function onInsertRowBefore() {
-		onInsertRow(0);
+	function onInsertListPairBefore() {
+		onInsertListPair(0);
 	}
 
 	/**
 	 * Inserts a row after the currently selected row.
 	 */
-	function onInsertRowAfter() {
-		onInsertRow(2);
+	function onInsertListPairAfter() {
+		onInsertListPair(2);
 	}
 
 	/**
 	 * Deletes the currently selected row.
 	 */
-	function onDeleteRow() {
+	function onDeleteListPair() {
 		if (!selectedCell) {
 			return;
 		}
@@ -102,27 +102,27 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 		const { sectionName, rowIndex } = selectedCell;
 
 		setSelectedCell();
-		setAttributes(deleteRow(attributes, { sectionName, rowIndex }));
+		setAttributes(deleteListPair(attributes, { sectionName, rowIndex }));
 	}
 
 
 	/**
-	 * Creates a table based on dimensions in local state.
+	 * Creates a description list based on dimensions in local state.
 	 *
 	 * @param {Object} event Form submit event.
 	 */
-	function onCreateTable(event) {
+	function onCreateDescriptionList(event) {
 		event.preventDefault();
 
 		setAttributes(
-			createTable({
+			createDescriptionList({
 				rowCount: parseInt(initialRowCount, 10) || 2,
 			})
 		);
 	}
 
 	/**
-	 * Changes the content of the currently selected cell.
+	 * Changes the content of the currently selected element.
 	 *
 	 * @param {Array} content A RichText content value.
 	 */
@@ -148,19 +148,19 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 			icon: tableRowBefore,
 			title: __('Insert List pair before'),
 			isDisabled: !selectedCell,
-			onClick: onInsertRowBefore,
+			onClick: onInsertListPairBefore,
 		},
 		{
 			icon: tableRowAfter,
 			title: __('Insert List pair after'),
 			isDisabled: !selectedCell,
-			onClick: onInsertRowAfter,
+			onClick: onInsertListPairAfter,
 		},
 		{
 			icon: tableRowDelete,
 			title: __('Delete List pair'),
 			isDisabled: !selectedCell,
-			onClick: onDeleteRow,
+			onClick: onDeleteListPair,
 		},
 	];
 
@@ -178,7 +178,7 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 									hasArrowIndicator
 									icon={"welcome-add-page"}
 									toggleProps={toggleProps}
-									label={__('Edit table')}
+									label={__('Edit description list')}
 									controls={tableControls}
 								/>
 							)}
@@ -216,7 +216,7 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 				>
 					<form
 						className="blocks-table__placeholder-form"
-						onSubmit={onCreateTable}
+						onSubmit={onCreateDescriptionList}
 					>
 						<TextControl
 							type="number"
