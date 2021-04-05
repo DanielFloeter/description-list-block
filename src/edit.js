@@ -3,29 +3,41 @@ import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
 	Button,
+	DropdownMenu,
 	Placeholder,
 	TextControl,
+	ToolbarGroup,
+	ToolbarItem,
 } from '@wordpress/components';
 import {
+	tableRowAfter,
+	tableRowBefore,
+	tableRowDelete,
+} from '@wordpress/icons';
+import {
+	BlockControls,
 	RichText,
 	BlockIcon,
 	useBlockProps,
 } from '@wordpress/block-editor';
 import './editor.scss';
-
-/**
- * Internal dependencies
- */
 import {
 	createTable,
 	updateSelectedCell,
-	isEmptyTableSection,
+	insertRow,
+	deleteRow,
+	isEmptyDescriptionList,
 } from './state';
+
 
 export default function Edit({ attributes: { list }, attributes, setAttributes }) {
 	const blockProps = useBlockProps();
 	const [initialRowCount, setInitialRowCount] = useState(2);
 	const [selectedCell, setSelectedCell] = useState();
+	const placeholder = {
+		dt: __('Term ...'),
+		dd: __('Description ...'),
+	};
 
 	/**
 	 * Updates the initial row count used for table creation.
@@ -35,6 +47,64 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 	function onChangeInitialRowCount(count) {
 		setInitialRowCount(count);
 	}
+
+
+	/**
+	 * Inserts a row at the currently selected row index, plus `delta`.
+	 *
+	 * @param {number} delta Offset for selected row index at which to insert.
+	 */
+	function onInsertRow(delta) {
+		if (!selectedCell) {
+			return;
+		}
+
+		const { sectionName, rowIndex } = selectedCell;
+		const listPairIndex = rowIndex - (rowIndex % 2);
+		const newRowIndex = listPairIndex + delta;
+
+		setAttributes(
+			insertRow(attributes, {
+				sectionName,
+				rowIndex: newRowIndex,
+			})
+		);
+		// Select the first cell of the new row
+		setSelectedCell({
+			sectionName,
+			rowIndex: newRowIndex,
+			type: 'cell',
+		});
+	}
+
+	/**
+	 * Inserts a row before the currently selected row.
+	 */
+	function onInsertRowBefore() {
+		onInsertRow(0);
+	}
+
+	/**
+	 * Inserts a row after the currently selected row.
+	 */
+	function onInsertRowAfter() {
+		onInsertRow(2);
+	}
+
+	/**
+	 * Deletes the currently selected row.
+	 */
+	function onDeleteRow() {
+		if (!selectedCell) {
+			return;
+		}
+
+		const { sectionName, rowIndex } = selectedCell;
+
+		setSelectedCell();
+		setAttributes(deleteRow(attributes, { sectionName, rowIndex }));
+	}
+
 
 	/**
 	 * Creates a table based on dimensions in local state.
@@ -73,38 +143,54 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 		);
 	}
 
-	const isEmpty = isEmptyTableSection( attributes[ 'list' ] );
+	const tableControls = [
+		{
+			icon: tableRowBefore,
+			title: __('Insert list pair before'),
+			isDisabled: !selectedCell,
+			onClick: onInsertRowBefore,
+		},
+		{
+			icon: tableRowAfter,
+			title: __('Insert list pair after'),
+			isDisabled: !selectedCell,
+			onClick: onInsertRowAfter,
+		},
+		{
+			icon: tableRowDelete,
+			title: __('Delete list pair'),
+			isDisabled: !selectedCell,
+			onClick: onDeleteRow,
+		},
+	];
 
-	// let beispiel_list = [
-	// 	{
-	// 		content: __(''),
-	// 		tag: 'dt',
-	// 		placeholder: __('Term ...')
-	// 	},
-	// 	{
-	// 		content: __(''),
-	// 		tag: 'dd',
-	// 		placeholder: __('Description ...')
-	// 	},
-	// 	{
-	// 		content: __(''),
-	// 		tag: 'dt',
-	// 		placeholder: __('Term ...')
-	// 	},
-	// 	{
-	// 		content: __(''),
-	// 		tag: 'dd',
-	// 		placeholder: __('Description ...')
-	// 	},
-	// ];
-
-//console.log("attributs", isEmpty, attributes[ 'list' ]);
+	const isEmpty = isEmptyDescriptionList(attributes['list']);
 
 	return (
 		<dl {...blockProps}>
+
 			{ !isEmpty && (
-				attributes[ 'list' ].map(
-					({ content, tag, placeholder }, rowIndex) => (
+				<BlockControls>
+					<ToolbarGroup>
+						<ToolbarItem>
+							{(toggleProps) => (
+								<DropdownMenu
+									hasArrowIndicator
+									icon={"welcome-add-page"}
+									toggleProps={toggleProps}
+									label={__('Edit table')}
+									controls={tableControls}
+								/>
+							)}
+						</ToolbarItem>
+					</ToolbarGroup>
+				</BlockControls>
+			)}
+
+
+			{ !isEmpty && (
+				attributes['list'].map(
+					({ content, tag }, rowIndex) => (
 						<RichText
 							tagName={tag}
 							key={rowIndex}
@@ -117,7 +203,7 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 									type: 'cell',
 								});
 							}}
-							placeholder={placeholder}
+							placeholder={placeholder[tag]}
 						/>
 					)
 				)

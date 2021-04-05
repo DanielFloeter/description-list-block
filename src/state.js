@@ -16,21 +16,79 @@ import { times, get, mapValues, every, pick } from 'lodash';
 export function createTable({ rowCount }) {
 	return {
 		list: times(rowCount * 2, (i) => {
-			if( 0 === i % 2 ){
+			if (0 === i % 2) {
 				return ({
 					content: '',
 					tag: 'dt',
-					placeholder: __('Term ...'),
 				})
 			} else {
 				return ({
 					content: '',
 					tag: 'dd',
-					placeholder: __('Description ...'),
 				})
 			}
-		
+
 		}),
+	};
+}
+
+/**
+ * Returns the first row in the table.
+ *
+ * @param {Object} state Current table state.
+ *
+ * @return {Object} The first table row.
+ */
+export function getFirstRow(state) {
+	if (!isEmptyDescriptionList(state.list)) {
+		return state.list[0];
+	}
+}
+
+/**
+ * Inserts a row in the table state.
+ *
+ * @param {Object} state               Current table state.
+ * @param {Object} options
+ * @param {string} options.sectionName Section in which to insert the row.
+ * @param {number} options.rowIndex    Row index at which to insert the row.
+ *
+ * @return {Object} New table state.
+ */
+export function insertRow(state, { sectionName, rowIndex }) {
+
+	return {
+		list: [
+			...state[sectionName].slice(0, rowIndex),
+			{
+				content: '',
+				tag: 'dt',
+			},
+			{
+				content: '',
+				tag: 'dd',
+			},
+			...state[sectionName].slice(rowIndex),],
+	};
+}
+
+/**
+ * Deletes a row from the table state.
+ *
+ * @param {Object} state               Current table state.
+ * @param {Object} options
+ * @param {string} options.sectionName Section in which to delete the row.
+ * @param {number} options.rowIndex    Row index to delete.
+ *
+ * @return {Object} New table state.
+ */
+ export function deleteRow( state, { sectionName, rowIndex } ) {
+	const listPairIndex = rowIndex % 2 ? rowIndex - 1 : rowIndex + 1;
+
+	return {
+		[ sectionName ]: state[ sectionName ].filter(
+			( row, index ) => { return index !== rowIndex && index !== listPairIndex; }
+		),
 	};
 }
 
@@ -48,14 +106,13 @@ export function updateSelectedCell(state, selection, updateCell) {
 		return state;
 	}
 
-	//const tableSections = pick(state, ['head', 'body', 'foot']);
 	const tableSections = pick(state, ['list']);
 	const {
 		sectionName: selectionSectionName,
 		rowIndex: selectionRowIndex,
 	} = selection;
 
-	
+
 	return mapValues(tableSections, (section, sectionName) => {
 		if (selectionSectionName && selectionSectionName !== sectionName) {
 			return section;
@@ -74,26 +131,8 @@ export function updateSelectedCell(state, selection, updateCell) {
 			if (!isCellSelected(cellLocation, selection)) {
 				return row;
 			}
-			
-			//console.log("s", row, updateCell(row) );
 
 			return updateCell(row);
-			
-
-			// return {
-			// 	cells: row.cells.map((cellAttributes, columnIndex) => {
-			// 		const cellLocation = {
-			// 			sectionName,
-			// 			rowIndex,
-			// 		};
-
-			// 		if (!isCellSelected(cellLocation, selection)) {
-			// 			return cellAttributes;
-			// 		}
-
-			// 		return updateCell(cellAttributes);
-			// 	}),
-			// };
 		});
 	});
 }
@@ -106,8 +145,8 @@ export function updateSelectedCell(state, selection, updateCell) {
  *
  * @return {boolean} True if the cell is selected, false otherwise.
  */
- export function isCellSelected( cellLocation, selection ) {
-	if ( ! cellLocation || ! selection ) {
+export function isCellSelected(cellLocation, selection) {
+	if (!cellLocation || !selection) {
 		return false;
 	}
 
@@ -126,6 +165,7 @@ export function updateSelectedCell(state, selection, updateCell) {
  *
  * @return {boolean} True if the list section is empty, false otherwise.
  */
-export function isEmptyTableSection(section) {
+export function isEmptyDescriptionList(section) {
 	return !section || !section.length;
 }
+

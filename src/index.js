@@ -26,16 +26,28 @@ registerBlockType( name, {
         attributes: {
 			list: [
 				{
-					content: __( 'Version' ),
+					content: __( '5.2' ),
 					tag: 'dt',
 				},
 				{
-					content: __( 'Jazz Musician' ),
+					content: __( 'Jaco Pastorius' ),
 					tag: 'dd',
 				},
 				{
-					content: __( 'Release Date' ),
+					content: __( '5.1' ),
 					tag: 'dt',
+				},
+				{
+					content: __( 'Betty Carter' ),
+					tag: 'dd',
+				},
+				{
+					content: __( '5.0' ),
+					tag: 'dt',
+				},
+				{
+					content: __( 'Bebo Valdés' ),
+					tag: 'dd',
 				},
 			],
 

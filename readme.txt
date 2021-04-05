@@ -16,7 +16,7 @@ Displays a description list using the dl element consist of a series of term and
 Displays a archive of posts for one or more specific categories. It can be configured to either show by month or year with post counts and as a listing or a pulldown .
 
 = Features =
-* Option enable keycode
+* Option Enable keycode
 * Add new DT and DD with ENTER key
 * Switch between adding new DT and DD with TAB key
 * Transforms DT to DD and reverse
@@ -47,5 +47,5 @@ The Category Archives Block lets you show posts for one or more specific categor
 
 == Changelog ==
 
-= 0.1.0 - March 26th 2021 =
+= 0.1.0 - April 05th 2021 =
 * Release
