@@ -1,7 +1,7 @@
 === Description List Block ===
 Contributors:      kometschuh
 Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
-Tags:              block, category, archive, archives, yearly
+Tags:              block, description list, list
 Requires at least: 5.6
 Tested up to:      5.7
 Stable tag:        0.1.0
@@ -17,9 +17,9 @@ Displays a archive of posts for one or more specific categories. It can be confi
 
 = Features =
 * Option Enable keycode
-* Add new DT and DD with ENTER key
-* Switch between adding new DT and DD with TAB key
-* Transforms DT to DD and reverse
+* Add new dt and dd with ENTER key
+* Switch between adding new dt and dd with TAB key
+* Transforms dt to dd
 
 = Contribute =
 While using this plugin if you find any bug or any conflict, please submit an issue at [Github](https://github.com/DanielFloeter/description-list-block) (If possible with a pull request).
@@ -30,20 +30,20 @@ This section describes how to install the plugin and get it working.
 
 e.g.
 
-1. Upload the plugin files to the `/wp-content/plugins/category-archive-block` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the `/wp-content/plugins/description-list-block` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 
 
 == Frequently Asked Questions ==
 
-= How is the Cateogry Archives Block different than the built-in Archive widget? =
+= How is the Description List Block different than the built-in List Block? =
 
-The Category Archives Block lets you show posts for one or more specific categories.  The built-in Archive widget shows posts for all categories.
+The Description List Block lets you show a description list with terms and descriptions (dt, dd).  The built-in List Block render unorderd or orderd HTML list elements (ul, ol).
 
 == Screenshots ==
 
-1. From the Category Archives Block control, you can set the title, category, whether to group by month or year and whether to show post counts.
-2. The archive displayed as a list with post counts and the archive displayed as a pulldown of years without post counts.
+1. From the Description List Block control, you can insert Description List pairs (dt, dd) before or after the current selection or delete pairs.
+2. The Description List Block in the front-end view.
 
 == Changelog ==
 

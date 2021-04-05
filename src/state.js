@@ -9,7 +9,6 @@ import { times, get, mapValues, every, pick } from 'lodash';
  *
  * @param {Object} options
  * @param {number} options.rowCount    Row count for the table to create.
- * @param {string} options.tag  Tag name.
  *
  * @return {Object} New table state.
  */

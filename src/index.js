@@ -16,7 +16,6 @@ registerBlockType( name, {
         'description-list-block'
     ),
 	keywords: [
-        __('definition'),
         __('dl'),
         __('dt'),
         __('dd'),
