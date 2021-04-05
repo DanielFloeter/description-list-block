@@ -13,13 +13,13 @@ Displays a description list using the dl element consist of a series of term and
 
 == Description ==
 
-Displays a archive of posts for one or more specific categories. It can be configured to either show by month or year with post counts and as a listing or a pulldown .
+Displays a description list using the dl element consist of a series of term and description pairs (dt, dd).
 
 = Features =
-* Option Enable keycode
-* Add new dt and dd with ENTER key
-* Switch between adding new dt and dd with TAB key
-* Transforms dt to dd
+* Create a description list with n-elements
+* Insert description list pair before selection
+* Insert description list pair after selection
+* Delete description list pair
 
 = Contribute =
 While using this plugin if you find any bug or any conflict, please submit an issue at [Github](https://github.com/DanielFloeter/description-list-block) (If possible with a pull request).
