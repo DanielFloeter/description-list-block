@@ -36,7 +36,7 @@ e.g.
 
 == Frequently Asked Questions ==
 
-= How to add only `<dd>` elements?=
+= How to add only dd elements? =
 
 Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 
