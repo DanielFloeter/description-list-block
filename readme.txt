@@ -9,7 +9,7 @@ Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Displays a description list using the `<dl>` element consist of a series of term and description pairs (`<dt>`, `<dd>`).
+Displays a description list using the dl element consist of a series of term and description pairs (dt, dd).
 
 == Description ==
 
