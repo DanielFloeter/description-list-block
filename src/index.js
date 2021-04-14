@@ -19,6 +19,10 @@ registerBlockType( name, {
         __('dl'),
         __('dt'),
         __('dd'),
+		__('description'),
+		__('definition'),
+		__('list'),
+		__('dictionary'),
         __('tiptoppress'),
     ],
 	example: {

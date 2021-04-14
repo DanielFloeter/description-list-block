@@ -13,7 +13,7 @@ Displays a description list using the dl element consist of a series of term and
 
 == Description ==
 
-Displays a description list using the dl element consist of a series of term and description pairs (dt, dd).
+Displays a description list or definition list using the dl element consist of a series of term and description pairs (dt, dd) and displays that elements in definnition form like a dictionary.
 
 = Features =
 * Create a description list with n-elements
