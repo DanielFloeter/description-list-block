@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              block, description list, list
 Requires at least: 5.6
 Tested up to:      5.7
-Stable tag:        0.1.0
+Stable tag:        1.0.0
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,6 +16,10 @@ Displays a description list using the dl element consist of a series of term and
 Displays a description list or definition list (`<dl>`) using the dl element consist of a series of term and description pairs (`<dt>`, `<dd>`) and displays that elements in definition form like a dictionary.
 
 = Features =
+* Shortcut Cmd/Win+ENTER for `<dd>` elements: Insert description list pair after
+* Shortcut Cmd/Win+E: description list pair before selection
+* Shortcut Cmd/Win+D: description list pair after selection
+* Shortcut Shift+ENTER: Line break (`<br>`)
 * Create a description list with n-elements
 * Insert description list pair before selection
 * Insert description list pair after selection
@@ -40,16 +44,15 @@ e.g.
 
 Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 
-= How is the Description List Block different than the built-in List Block? =
-
-The Description List Block lets you show a description list with terms and descriptions (dt, dd).  The built-in List Block render unorderd or orderd HTML list elements (ul, ol).
-
 == Screenshots ==
 
 1. From the Description List Block control, you can insert Description List pairs (dt, dd) before or after the current selection or delete pairs.
 2. The Description List Block in the front-end view.
 
 == Changelog ==
+
+= 1.0.0 - Mai 02rd 2021 =
+* Shortcut
 
 = 0.1.0 - April 05th 2021 =
 * Release

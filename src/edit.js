@@ -19,6 +19,7 @@ import {
 	RichText,
 	BlockIcon,
 	useBlockProps,
+	RichTextShortcut,
 } from '@wordpress/block-editor';
 import './editor.scss';
 import {
@@ -28,7 +29,7 @@ import {
 	deleteListPair,
 	isEmptyDescriptionList,
 } from './state';
-
+import { ENTER, SHIFT, UP } from '@wordpress/keycodes';
 
 export default function Edit({ attributes: { list }, attributes, setAttributes }) {
 	const blockProps = useBlockProps();
@@ -69,6 +70,7 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 				rowIndex: newRowIndex,
 			})
 		);
+
 		// Select the description list pair
 		setSelectedCell({
 			sectionName,
@@ -143,6 +145,52 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 		);
 	}
 
+	function onEnter() { 
+
+		const { sectionName, rowIndex } = selectedCell;
+			const tag = rowIndex % 2 ? 'dd' : 'dt';
+			switch (tag) {
+				case 'dt':
+					// setSelectedCell({
+					// 	sectionName: 'list',
+					// 	rowIndex: rowIndex + 2,
+					// 	type: 'cell',
+					// });
+				break;
+				case 'dd':
+					const delta = 2;
+					const { sectionName, rowIndex } = selectedCell;
+					const listPairIndex = rowIndex - (rowIndex % 2);
+					const newRowIndex = listPairIndex + delta;
+					
+					setAttributes(
+						insertListPair(attributes, {
+							sectionName,
+							rowIndex: newRowIndex,
+						})
+					);
+
+					setSelectedCell({
+						sectionName: 'list',
+						rowIndex: newRowIndex - 1,
+						type: 'cell',
+					});
+					break;
+				}
+
+			// setTimeout( (target) => { 
+			// 	jQuery(target).next().focus(); 
+			// }, 0, event.target );
+	}
+
+	function onUP() {
+		onInsertListPair(0);
+	}
+
+	function onDown() {
+		onInsertListPair(2);
+	}
+
 	const tableControls = [
 		{
 			icon: tableRowBefore,
@@ -168,7 +216,6 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 
 	return (
 		<dl {...blockProps}>
-
 			{ !isEmpty && (
 				<BlockControls>
 					<ToolbarGroup>
@@ -186,11 +233,29 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 					</ToolbarGroup>
 				</BlockControls>
 			)}
-
-
+			{ !isEmpty && (
+				<>
+					<RichTextShortcut
+						type="primary"
+						character="e"
+						onUse={ onUP }
+					/>
+					<RichTextShortcut
+						type="primary"
+						character="d"
+						onUse={ onDown }
+					/>
+					<RichTextShortcut
+						type="primary"
+						character="ENTER"
+						onUse={ onEnter }
+					/>
+				</>
+			)}
 			{ !isEmpty && (
 				attributes['list'].map(
 					({ content, tag }, rowIndex) => (
+						
 						<RichText
 							tagName={tag}
 							key={rowIndex}
@@ -203,8 +268,11 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 									type: 'cell',
 								});
 							}}
+							multiline='false'
+							// onKeyDownCapture={onKeyUp}
 							placeholder={placeholder[tag]}
 						/>
+						
 					)
 				)
 			)}
