@@ -1,7 +1,7 @@
 === Description List Block ===
 Contributors:      kometschuh
 Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
-Tags:              block, description list, list
+Tags:              block, description list, gutenberg, list
 Requires at least: 5.6
 Tested up to:      5.7
 Stable tag:        1.0.0
@@ -13,7 +13,7 @@ Displays a description list using the dl element consist of a series of term and
 
 == Description ==
 
-Displays a description list or definition list (`<dl>`) using the dl element consist of a series of term and description pairs (`<dt>`, `<dd>`) and displays that elements in definition form like a dictionary.
+Displays a description list or definition list (`<dl>`) using the dl element consist of a series of term and description pairs (`<dt>`, `<dd>`) and displays that elements in definition form like a dictionary in the Gutenberg block editor.
 
 = Features =
 * Shortcuts

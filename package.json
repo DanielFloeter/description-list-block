@@ -1,8 +1,8 @@
 {
 	"name": "description-list-block",
 	"version": "1.0.0",
-	"description": "Example block written with ESNext standard and JSX support – build step required.",
-	"author": "The WordPress Contributors",
+	"description": "Displays a description list using the dl element consist of a series of term and description pairs (dt, dd).",
+	"author": "kometschuh",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
