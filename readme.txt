@@ -52,6 +52,7 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 
 1. The Description List Block in the front-end view.
 2. From the Description List Block control, you can insert description list pairs (dt, dd) before or after the current selection or delete a description list.
+3. Grid style
 
 == Changelog ==
 
