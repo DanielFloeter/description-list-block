@@ -1,5 +1,5 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
+import { __, _x } from '@wordpress/i18n';
 
 import './style.scss';
 
@@ -56,6 +56,16 @@ registerBlockType( name, {
 
 		},
 	},
+	styles: [
+		{
+			name: 'regular',
+			label: _x('Default', 'block style'),
+			isDefault: true,
+		},
+		{ 
+			name: 'grid', 
+			label: __('Grid') },
+	],
 	edit: Edit,
 	save,
 } );

@@ -5,8 +5,21 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-description-list-block {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+.wp-block-description-list-block-description-list {
+
+		// "Float" style variation.
+		&.is-style-grid {
+
+			@media only screen and (min-width: 480px) {
+
+				dd {
+					padding-left: 4em;
+				}
+
+				display: grid;
+				grid-template-columns: auto 1fr;
+			}
+		}
 }
+
+
