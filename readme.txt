@@ -17,11 +17,11 @@ Displays a description list or definition list using the `<dl>` element consist 
 
 = Features =
 * Shortcuts
-* Grid and default styles
+* Default and Grid styles
 * Create a description list with n-elements
-* Insert a description list before selection
-* Insert a description list after selection
-* Delete a description list
+* Insert a new term (`<dt>`) and description (`<dd>`) before selection
+* Insert a new term (`<dt>`) and description (`<dd>`) after selection
+* Delete the selcted term (`<dt>`) and description (`<dd>`) pair
 
 = Shortcuts =
 * Cmd(⌘)+E (Mac) or Shift+E (Window): Insert a description list before selection
@@ -51,8 +51,10 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 == Screenshots ==
 
 1. The Description List Block in the front-end view.
-2. From the Description List Block control, you can insert description list pairs (dt, dd) before or after the current selection or delete a description list.
-3. Grid style
+2. Rendered HTML
+3. From the Block control or with shortcuts, you can insert description list pairs (dt, dd) before or after the current selection or delete a description list.
+4. Grid style
+5. Block Styles 'transformation' without change any code.
 
 == Changelog ==
 

@@ -194,19 +194,19 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 	const tableControls = [
 		{
 			icon: tableRowBefore,
-			title: __('Insert DL before (Cmd/Shift+E)'),
+			title: __('Insert before (Cmd/Shift+E)'),
 			isDisabled: !selectedCell,
 			onClick: onInsertListPairBefore,
 		},
 		{
 			icon: tableRowAfter,
-			title: __('Insert DL after (Cmd/Shift+D)'),
+			title: __('Insert after (Cmd/Shift+D)'),
 			isDisabled: !selectedCell,
 			onClick: onInsertListPairAfter,
 		},
 		{
 			icon: tableRowDelete,
-			title: __('Delete DL'),
+			title: __('Delete selected'),
 			isDisabled: !selectedCell,
 			onClick: onDeleteListPair,
 		},
