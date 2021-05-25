@@ -191,6 +191,10 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 		onInsertListPair(2);
 	}
 
+	function onDelete() {
+		onDeleteListPair();
+	}
+
 	const tableControls = [
 		{
 			icon: tableRowBefore,
@@ -206,7 +210,7 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 		},
 		{
 			icon: tableRowDelete,
-			title: __('Delete selected'),
+			title: __('Delete selected (Cmd/Shift+Y)'),
 			isDisabled: !selectedCell,
 			onClick: onDeleteListPair,
 		},
@@ -247,9 +251,14 @@ export default function Edit({ attributes: { list }, attributes, setAttributes }
 					/>
 					<RichTextShortcut
 						type="primary"
+						character="y"
+						onUse={ onDelete }
+					/>
+					{/* <RichTextShortcut
+						type="primary"
 						character="ENTER"
 						onUse={ onEnter }
-					/>
+					/> */}
 				</>
 			)}
 			{ !isEmpty && (

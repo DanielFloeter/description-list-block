@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              block, description list, gutenberg, list
 Requires at least: 5.6
 Tested up to:      5.7
-Stable tag:        1.1.0
+Stable tag:        1.1.1
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -24,10 +24,10 @@ Displays a description list or definition list using the `<dl>` element consist 
 * Delete the selcted term (`<dt>`) and description (`<dd>`) pair
 
 = Shortcuts =
-* Cmd(⌘)+E (Mac) or Shift+E (Window): Insert a description list before selection
-* Cmd(⌘)+D (Mac) or Shift+D (Window)): Insert a description list after selection
+* Cmd(⌘)+E (Mac) or Shift+E (Window): Insert before selection
+* Cmd(⌘)+D (Mac) or Shift+D (Window)): Insert after selection
+* Cmd(⌘)+Y (Mac) or Shift+Y (Window)): Delete selection
 * Shift+ENTER (Mac or Window): Line break (`<br>`)
-* Cmd(⌘)+ENTER (Mac) or Shift+ENTER (Window) only for `<dd>` elements: Insert a description list after selection
 
 = Contribute =
 While using this plugin if you find any bug or any conflict, please submit an issue at [Github](https://github.com/DanielFloeter/description-list-block) (If possible with a pull request).
@@ -57,6 +57,9 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 5. Block Styles 'transformation' without change any code.
 
 == Changelog ==
+
+= 1.1.0 - Mai 09th 2021 =
+* Shortcut Delete selected description list
 
 = 1.1.0 - Mai 09th 2021 =
 * Grid style

@@ -1,6 +1,6 @@
 {
 	"name": "description-list-block",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "Displays a description list using the dl element consist of a series of term and description pairs (dt, dd).",
 	"author": "kometschuh",
 	"license": "GPL-2.0-or-later",
