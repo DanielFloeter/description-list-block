@@ -7,7 +7,9 @@
     "supports": {
         "html": true,
         "anchor": true,
-        "fontSize": true,
+        "typography": {
+            "fontSize": true
+        },
         "color": {
             "gradients": true
         },
