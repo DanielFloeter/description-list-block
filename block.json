@@ -8,7 +8,7 @@
         "html": true,
         "anchor": true,
         "typography": {
-            "fontSize": true
+            "fontSize": false
         },
         "color": {
             "gradients": true
@@ -16,6 +16,8 @@
         "__unstablePasteTextInline": true
     },
     "attributes": {
+        "termFontSize": {},
+        "descriptionsFontSize": {},
         "list": {
             "type": "array",
             "default": [],

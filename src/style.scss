@@ -7,20 +7,20 @@
 
 .wp-block-description-list-block-description-list {
 
-		// "Float" style variation.
-		&.is-style-grid {
+	// "Float" style variation.
+	&.is-style-grid {
 
-			@media only screen and (min-width: 248px) {
+		@media only screen and (min-width: 248px) {
 
-				// dd {
-				// 	padding-left: 2em;
-				// }
+			// dd {
+			// 	padding-left: 2em;
+			// }
 
-				display: grid;
-				// grid-template-columns: auto 1fr;
-				grid-template-columns: auto auto;
-			}
+			display: grid;
+			// grid-template-columns: auto 1fr;
+			grid-template-columns: auto auto;
 		}
+	}
 }
 
 
