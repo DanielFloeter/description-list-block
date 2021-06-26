@@ -16,12 +16,13 @@ Displays a description list using the dl element consist of a series of term and
 Displays a description list or definition list using the `<dl>` element consist of a series of term and description pairs (`<dt>`, `<dd>`) and displays that elements in definition form like a dictionary in the Gutenberg block editor.
 
 = Features =
-* Shortcuts
 * Default and Grid styles
 * Create a description list with n-elements
+* Font-size settings for each element tags (`<dt>` and `<dd>`)
 * Insert a new term (`<dt>`) and description (`<dd>`) before selection
 * Insert a new term (`<dt>`) and description (`<dd>`) after selection
 * Delete the selcted term (`<dt>`) and description (`<dd>`) pair
+* Access via Shortcuts
 
 = Shortcuts =
 * Cmd(⌘)+E (Mac) or Shift+E (Window): Insert before selection
@@ -57,6 +58,9 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 5. Block Styles 'transformation' without change any code.
 
 == Changelog ==
+
+= 1.1.3 - Juni 26th 2021 =
+* Font-size styles for element tags
 
 = 1.1.2 - Juni 22th 2021 =
 * Bugfix WordPress 5.8 API change block.json fontSize
