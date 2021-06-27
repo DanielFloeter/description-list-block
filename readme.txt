@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              block, description list, gutenberg, list
 Requires at least: 5.6
 Tested up to:      5.8
-Stable tag:        1.1.3
+Stable tag:        1.1.4
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -18,7 +18,7 @@ Displays a description list or definition list using the `<dl>` element consist 
 = Features =
 * Default and Grid styles
 * Create a description list with n-elements
-* Font-size settings for each element tags (`<dt>` and `<dd>`)
+* Color and font-size settings for element tags (`<dt>` and `<dd>`)
 * Insert a new term (`<dt>`) and description (`<dd>`) before selection
 * Insert a new term (`<dt>`) and description (`<dd>`) after selection
 * Delete the selcted term (`<dt>`) and description (`<dd>`) pair
@@ -58,6 +58,9 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 5. Block Styles 'transformation' without change any code.
 
 == Changelog ==
+
+= 1.1.4 - Juni 27th 2021 =
+* Color styles for element tags
 
 = 1.1.3 - Juni 26th 2021 =
 * Font-size styles for element tags

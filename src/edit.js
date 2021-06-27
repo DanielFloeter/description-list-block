@@ -10,6 +10,7 @@ import {
 	ToolbarGroup,
 	ToolbarItem,
 	FontSizePicker,
+	ColorPalette,
 } from '@wordpress/components';
 import {
 	tableRowAfter,
@@ -24,6 +25,7 @@ import {
 	useBlockProps,
 	RichTextShortcut,
 } from '@wordpress/block-editor';
+
 import './editor.scss';
 import {
 	createDescriptionList,
@@ -37,8 +39,10 @@ import { ENTER, SHIFT, UP } from '@wordpress/keycodes';
 
 export default function Edit({ attributes, setAttributes }) {
 	const { 
-		termFontSize, 
-		descriptionsFontSize 
+		termsFontSize, 
+		descriptionsFontSize,
+		termsColor,
+		descriptionsColor
 	} = attributes;
 	const blockProps = useBlockProps();
 	const [initialRowCount, setInitialRowCount] = useState(2);
@@ -249,6 +253,11 @@ export default function Edit({ attributes, setAttributes }) {
         },
     ];
 
+	const colors = wp.data.select( "core/editor" ).getEditorSettings().colors.filter(
+		word => word['origin'] !== 'core'
+		);
+
+
 	return (
 		<>
 			<InspectorControls>
@@ -256,10 +265,10 @@ export default function Edit({ attributes, setAttributes }) {
 					<h2>Terms</h2>
 					<FontSizePicker
 						fontSizes={ fontSizes }
-						value={ termFontSize }
-						onChange={ (newFontSize) => setAttributes( { termFontSize: newFontSize } )}
+						value={ termsFontSize }
+						onChange={ (newFontSize) => setAttributes( { termsFontSize: newFontSize } )}
 					/>
-					 <h2>Descriptions</h2>
+					<h2>Descriptions</h2>
 					<FontSizePicker
 						fontSizes={ fontSizes }
 						value={ descriptionsFontSize }
@@ -268,10 +277,25 @@ export default function Edit({ attributes, setAttributes }) {
 						} }
 					/> 
 				</PanelBody>
+				<PanelBody title={ __( 'Text color' ) }>
+					<h2>Terms</h2>
+					<ColorPalette
+						colors={ colors }
+						value={ termsColor }
+						onChange={ ( newColor ) => setAttributes( {termsColor: newColor} ) }
+						disableAlpha
+					/>
+					<h2>Descriptions</h2>
+					<ColorPalette
+						colors={ colors }
+						value={ descriptionsColor }
+						onChange={ ( newColor ) => setAttributes( {descriptionsColor: newColor} ) }
+					/>
+				</PanelBody>
 			</InspectorControls>
 			<dl {...blockProps}
 				className={classnames( blockProps.className, {
-					[ `has-${ termFontSize }-term-font-size` ]: termFontSize,
+					[ `has-${ termsFontSize }-term-font-size` ]: termsFontSize,
 					[ `has-${ descriptionsFontSize }-descriptions-font-size` ]: descriptionsFontSize,
 				} )}
 			>
@@ -322,7 +346,12 @@ export default function Edit({ attributes, setAttributes }) {
 							<RichText
 								tagName={tag}
 								key={rowIndex}
-								style={{fontSize:(tag === 'dt' ? termFontSize : descriptionsFontSize)}}
+								style={
+									{
+										fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
+										color:(tag === 'dt' ? termsColor : descriptionsColor)
+									}
+								}
 								value={content}
 								onChange={onChange}
 								unstableOnFocus={() => {

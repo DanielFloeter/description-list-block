@@ -10,14 +10,13 @@
         "typography": {
             "fontSize": false
         },
-        "color": {
-            "gradients": true
-        },
         "__unstablePasteTextInline": true
     },
     "attributes": {
-        "termFontSize": {},
+        "termsFontSize": {},
         "descriptionsFontSize": {},
+        "termsColor": {},
+        "descriptionsColor": {},
         "list": {
             "type": "array",
             "default": [],

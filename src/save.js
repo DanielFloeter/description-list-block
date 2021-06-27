@@ -3,9 +3,15 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
 import classnames from 'classnames';
 
 export default function save({ attributes }) {
-	const { list, termFontSize, descriptionsFontSize } = attributes;
+	const { 
+		list, 
+		termsFontSize, 
+		descriptionsFontSize, 
+		termsColor, 
+		descriptionsColor,
+	} = attributes;
 	const className = classnames( {
-		[ `has-${ termFontSize }-term-font-size` ]: termFontSize,
+		[ `has-${ termsFontSize }-term-font-size` ]: termsFontSize,
 		[ `has-${ descriptionsFontSize }-descriptions-font-size` ]: descriptionsFontSize,
 	} );
 
@@ -19,7 +25,12 @@ export default function save({ attributes }) {
 				({ content, tag }, rowIndex) => {
 					return(
 					<RichText.Content
-						style={{fontSize:(tag === 'dt' ? termFontSize : descriptionsFontSize)}}
+						style={
+							{
+								fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
+								color:(tag === 'dt' ? termsColor : descriptionsColor)
+							}
+						}
 						tagName={tag}
 						value={content}
 						key={rowIndex}
