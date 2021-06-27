@@ -56,6 +56,7 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 3. From the Block control or with shortcuts, you can insert description list pairs (dt, dd) before or after the current selection or delete a description list.
 4. Grid style
 5. Block Styles 'transformation' without change any code.
+6. Seperate Term (dt) and Description (dd) settings
 
 == Changelog ==
 
