@@ -18,7 +18,7 @@ Displays a description list or definition list using the `<dl>` element consist 
 = Features =
 * Default, Indent and Grid styles
 * Create a description list with n-elements
-* Color, padding and font-size settings for element tags (`<dt>` and `<dd>`)
+* Color, padding and font-size settings for both element tags
 * Insert a new term (`<dt>`) and description (`<dd>`) before selection
 * Insert a new term (`<dt>`) and description (`<dd>`) after selection
 * Delete the selcted term (`<dt>`) and description (`<dd>`) pair

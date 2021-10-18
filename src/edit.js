@@ -298,6 +298,7 @@ export default function Edit({ attributes, setAttributes }) {
 						value={ descriptionsColor }
 						onChange={ ( newColor ) => setAttributes( {descriptionsColor: newColor} ) }
 					/>
+					<h2>Padding</h2>
 					<BoxControl
 						values={ descriptionsPadding }
 						onChange={ ( p ) => setAttributes( {descriptionsPadding: p} ) }
