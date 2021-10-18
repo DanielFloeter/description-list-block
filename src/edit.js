@@ -11,6 +11,7 @@ import {
 	ToolbarItem,
 	FontSizePicker,
 	ColorPalette,
+	__experimentalBoxControl as BoxControl,
 } from '@wordpress/components';
 import {
 	tableRowAfter,
@@ -42,7 +43,9 @@ export default function Edit({ attributes, setAttributes }) {
 		termsFontSize, 
 		descriptionsFontSize,
 		termsColor,
-		descriptionsColor
+		descriptionsColor,
+		termsPadding,
+		descriptionsPadding,
 	} = attributes;
 	const blockProps = useBlockProps();
 	const [initialRowCount, setInitialRowCount] = useState(2);
@@ -257,18 +260,31 @@ export default function Edit({ attributes, setAttributes }) {
 		word => word['origin'] !== 'core'
 		);
 
-
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Typography' ) }>
-					<h2>Terms</h2>
-					<FontSizePicker
-						fontSizes={ fontSizes }
-						value={ termsFontSize }
-						onChange={ (newFontSize) => setAttributes( { termsFontSize: newFontSize } )}
-					/>
-					<h2>Descriptions</h2>
+				<PanelBody title={ __( 'Terms' ) }>
+						<h2>Typography</h2>
+						<FontSizePicker
+							fontSizes={ fontSizes }
+							value={ termsFontSize }
+							onChange={ (newFontSize) => setAttributes( { termsFontSize: newFontSize } )}
+						/>
+						<h2>Text Color</h2>
+						<ColorPalette
+							colors={ colors }
+							value={ termsColor }
+							onChange={ ( newColor ) => setAttributes( {termsColor: newColor} ) }
+							disableAlpha
+						/>
+						<h2>Padding</h2>
+						<BoxControl
+							values={ termsPadding }
+							onChange={ ( p ) => setAttributes( {termsPadding: p} ) }
+						/>
+				</PanelBody>
+				<PanelBody title={ __( 'Descriptions' ) }>
+					<h2>Typography</h2>
 					<FontSizePicker
 						fontSizes={ fontSizes }
 						value={ descriptionsFontSize }
@@ -276,20 +292,15 @@ export default function Edit({ attributes, setAttributes }) {
 							setAttributes( { descriptionsFontSize: newFontSize } )
 						} }
 					/> 
-				</PanelBody>
-				<PanelBody title={ __( 'Text color' ) }>
-					<h2>Terms</h2>
-					<ColorPalette
-						colors={ colors }
-						value={ termsColor }
-						onChange={ ( newColor ) => setAttributes( {termsColor: newColor} ) }
-						disableAlpha
-					/>
-					<h2>Descriptions</h2>
+					<h2>Text Color</h2>
 					<ColorPalette
 						colors={ colors }
 						value={ descriptionsColor }
 						onChange={ ( newColor ) => setAttributes( {descriptionsColor: newColor} ) }
+					/>
+					<BoxControl
+						values={ descriptionsPadding }
+						onChange={ ( p ) => setAttributes( {descriptionsPadding: p} ) }
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -343,13 +354,17 @@ export default function Edit({ attributes, setAttributes }) {
 				{ !isEmpty && (
 					attributes['list'].map(
 						({ content, tag }, rowIndex) => (
-							<RichText
+							<RichText 
 								tagName={tag}
 								key={rowIndex}
 								style={
 									{
 										fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
-										color:(tag === 'dt' ? termsColor : descriptionsColor)
+										color:(tag === 'dt' ? termsColor : descriptionsColor),
+										paddingTop:(tag === 'dt' ? termsPadding?.top : descriptionsPadding?.top),
+										paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
+										paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
+										paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
 									}
 								}
 								value={content}

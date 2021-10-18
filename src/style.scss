@@ -6,22 +6,22 @@
  */
 
 .wp-block-description-list-block-description-list {
-
-	// "Float" style variation.
-	&.is-style-grid {
-
-		@media only screen and (min-width: 248px) {
-
-			// dd {
-			// 	padding-left: 2em;
-			// }
-
-			display: grid;
-			// grid-template-columns: auto 1fr;
-			grid-template-columns: auto auto;
-			align-items: center;
-		}
-	}
+    // "Float" style variation.
+    &.is-style-indent-start {
+        dd {
+            margin-inline-start: unset;
+        }
+    }
+    // Float style variation.
+    &.is-style-grid {
+        @media only screen and (min-width: 248px) {
+            // dd {
+            // 	padding-left: 2em;
+            // }
+            display: grid;
+            // grid-template-columns: auto 1fr;
+            grid-template-columns: auto auto;
+            align-items: center;
+        }
+    }
 }
-
-

@@ -9,63 +9,67 @@ import save from './save';
 import metadata from './../block.json';
 const { name } = metadata;
 
-registerBlockType( name, {
-	...metadata,
-	description: __(
+registerBlockType(name, {
+    ...metadata,
+    description: __(
         'Displays a description list using the dl element consist of a series of term and description pairs (dt, dd).',
         'description-list-block'
     ),
-	keywords: [
+    keywords: [
         __('dl'),
         __('dt'),
         __('dd'),
-		__('description'),
-		__('definition'),
-		__('list'),
-		__('dictionary'),
+        __('description'),
+        __('definition'),
+        __('list'),
+        __('dictionary'),
         __('tiptoppress'),
     ],
-	example: {
+    example: {
         attributes: {
-			list: [
-				{
-					content: __( '5.2' ),
-					tag: 'dt',
-				},
-				{
-					content: __( 'Jaco Pastorius' ),
-					tag: 'dd',
-				},
-				{
-					content: __( '5.1' ),
-					tag: 'dt',
-				},
-				{
-					content: __( 'Betty Carter' ),
-					tag: 'dd',
-				},
-				{
-					content: __( '5.0' ),
-					tag: 'dt',
-				},
-				{
-					content: __( 'Bebo Valdés' ),
-					tag: 'dd',
-				},
-			],
+            list: [{
+                    content: __('5.2'),
+                    tag: 'dt',
+                },
+                {
+                    content: __('Jaco Pastorius'),
+                    tag: 'dd',
+                },
+                {
+                    content: __('5.1'),
+                    tag: 'dt',
+                },
+                {
+                    content: __('Betty Carter'),
+                    tag: 'dd',
+                },
+                {
+                    content: __('5.0'),
+                    tag: 'dt',
+                },
+                {
+                    content: __('Bebo Valdés'),
+                    tag: 'dd',
+                },
+            ],
 
-		},
-	},
-	styles: [
-		{
-			name: 'regular',
-			label: _x('Default', 'block style'),
-			isDefault: true,
-		},
-		{ 
-			name: 'grid', 
-			label: __('Grid') },
-	],
-	edit: Edit,
-	save,
-} );
+        },
+    },
+    styles: [{
+            name: 'regular',
+            label: _x('Default', 'block style'),
+            isDefault: true,
+        },
+        {
+            name: 'indent-start',
+            label: _x('Indent Start', 'description-list-block'),
+            isDefault: true,
+        },
+        {
+            name: 'grid',
+            label: __('Grid')
+        },
+    ],
+    edit: Edit,
+    save,
+});

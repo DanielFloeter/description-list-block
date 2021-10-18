@@ -1,9 +1,9 @@
 {
-	"apiVersion": 2,
-	"name": "description-list-block/description-list",
-	"title": "Description List Block",
-	"category": "text",
-	"icon": "clipboard",
+    "apiVersion": 2,
+    "name": "description-list-block/description-list",
+    "title": "Description List Block",
+    "category": "text",
+    "icon": "clipboard",
     "supports": {
         "html": true,
         "anchor": true,
@@ -17,6 +17,8 @@
         "descriptionsFontSize": {},
         "termsColor": {},
         "descriptionsColor": {},
+        "termsPadding": {},
+        "descriptionsPadding": {},
         "list": {
             "type": "array",
             "default": [],
@@ -35,8 +37,8 @@
             }
         }
     },
-	"textdomain": "description-list-block",
-	"editorScript": "file:./build/index.js",
-	"editorStyle": "file:./build/index.css",
-	"style": "file:./build/style-index.css"
+    "textdomain": "description-list-block",
+    "editorScript": "file:./build/index.js",
+    "editorStyle": "file:./build/index.css",
+    "style": "file:./build/style-index.css"
 }

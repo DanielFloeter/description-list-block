@@ -16,9 +16,9 @@ Displays a description list using the dl element consist of a series of term and
 Displays a description list or definition list using the `<dl>` element consist of a series of term and description pairs (`<dt>`, `<dd>`) and displays that elements in definition form like a dictionary in the Gutenberg block editor.
 
 = Features =
-* Default and Grid styles
+* Default, Indent and Grid styles
 * Create a description list with n-elements
-* Color and font-size settings for element tags (`<dt>` and `<dd>`)
+* Color, padding and font-size settings for element tags (`<dt>` and `<dd>`)
 * Insert a new term (`<dt>`) and description (`<dd>`) before selection
 * Insert a new term (`<dt>`) and description (`<dd>`) after selection
 * Delete the selcted term (`<dt>`) and description (`<dd>`) pair
@@ -59,6 +59,10 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 6. Seperate Term (dt) and Description (dd) settings
 
 == Changelog ==
+
+= 1.1.5 - October 18th 2021 =
+* Add style Indent Start
+* Add option padding
 
 = 1.1.4 - Juni 27th 2021 =
 * Color styles for element tags
