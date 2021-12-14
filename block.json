@@ -17,8 +17,8 @@
         "descriptionsFontSize": {},
         "termsColor": {},
         "descriptionsColor": {},
-        "termsPadding": {},
-        "descriptionsPadding": {},
+        "termsMargin": {},
+        "descriptionsMargin": {},
         "list": {
             "type": "array",
             "default": [],

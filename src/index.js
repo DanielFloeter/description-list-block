@@ -61,13 +61,26 @@ registerBlockType(name, {
             isDefault: true,
         },
         {
-            name: 'indent-start',
-            label: _x('Indent Start', 'description-list-block'),
-            isDefault: true,
+            name: 'grid-1-4',
+            label: __('Grid (1:4)')
+        },
+        {
+            name: 'grid-1-2',
+            label: __('Grid (1:2)')
         },
         {
             name: 'grid',
-            label: __('Grid')
+            label: __('Grid (auto)')
+        },
+        {
+            name: 'indent-start-40',
+            label: _x('Indent 40 PX', 'description-list-block'),
+            isDefault: true,
+        },
+        {
+            name: 'indent-start',
+            label: _x('No indent', 'description-list-block'),
+            isDefault: true,
         },
     ],
     edit: Edit,

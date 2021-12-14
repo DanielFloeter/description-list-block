@@ -9,8 +9,8 @@ export default function save({ attributes }) {
 		descriptionsFontSize, 
 		termsColor, 
 		descriptionsColor,
-		termsPadding,
-		descriptionsPadding,
+		termsMargin,
+		descriptionsMargin,
 	} = attributes;
 	const className = classnames( {
 		[ `has-${ termsFontSize }-term-font-size` ]: termsFontSize,
@@ -31,10 +31,10 @@ export default function save({ attributes }) {
 							{
 								fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
 								color:(tag === 'dt' ? termsColor : descriptionsColor),
-								paddingTop:(tag === 'dt' ? termsPadding?.top : descriptionsPadding?.top),
-								paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
-								paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
-								paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
+								marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
+								marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
+								marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
+								marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
 							}
 						}
 						tagName={tag}

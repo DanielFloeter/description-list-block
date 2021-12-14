@@ -7,21 +7,51 @@
 
 .wp-block-description-list-block-description-list {
     // "Float" style variation.
+    &.is-style-indent-start,
+    &.is-style-indent-start-40 {
+        dt,
+        dd {
+            padding: 0;
+            margin: 0;
+        }
+    }
     &.is-style-indent-start {
         dd {
             margin-inline-start: unset;
         }
     }
+    &.is-style-indent-start-40 {
+        dd {
+            margin-inline-start: 40px;
+        }
+    }
     // Float style variation.
-    &.is-style-grid {
-        @media only screen and (min-width: 248px) {
-            // dd {
-            // 	padding-left: 2em;
-            // }
+    &.is-style-grid,
+    &.is-style-grid-1-2,
+    &.is-style-grid-1-4 {
+        @media only screen and (min-width: 480px) {
+            dt,
+            dd {
+                padding: 0;
+            	margin: 0;
+            }
             display: grid;
-            // grid-template-columns: auto 1fr;
-            grid-template-columns: auto auto;
             align-items: center;
+        }
+    }
+    &.is-style-grid {
+        @media only screen and (min-width: 320px) {
+            grid-template-columns: auto auto;
+        }
+    }
+    &.is-style-grid-1-2 {
+        @media only screen and (min-width: 320px) {
+            grid-template-columns: 1fr 2fr;
+        }
+    }
+    &.is-style-grid-1-4 {
+        @media only screen and (min-width: 320px) {
+            grid-template-columns: 1fr 4fr;
         }
     }
 }

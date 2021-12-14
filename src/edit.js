@@ -44,8 +44,8 @@ export default function Edit({ attributes, setAttributes }) {
 		descriptionsFontSize,
 		termsColor,
 		descriptionsColor,
-		termsPadding,
-		descriptionsPadding,
+		termsMargin,
+		descriptionsMargin,
 	} = attributes;
 	const blockProps = useBlockProps();
 	const [initialRowCount, setInitialRowCount] = useState(2);
@@ -264,27 +264,27 @@ export default function Edit({ attributes, setAttributes }) {
 		<>
 			<InspectorControls>
 				<PanelBody title={ __( 'Terms' ) }>
-						<h2>Typography</h2>
 						<FontSizePicker
 							fontSizes={ fontSizes }
 							value={ termsFontSize }
 							onChange={ (newFontSize) => setAttributes( { termsFontSize: newFontSize } )}
 						/>
-						<h2>Text Color</h2>
+						<hr />
+						<h3>Text Color</h3>
 						<ColorPalette
 							colors={ colors }
 							value={ termsColor }
 							onChange={ ( newColor ) => setAttributes( {termsColor: newColor} ) }
 							disableAlpha
 						/>
-						<h2>Padding</h2>
+						<hr />
+						<h3>Margin</h3>
 						<BoxControl
-							values={ termsPadding }
-							onChange={ ( p ) => setAttributes( {termsPadding: p} ) }
+							values={ termsMargin }
+							onChange={ ( p ) => setAttributes( {termsMargin: p} ) }
 						/>
 				</PanelBody>
 				<PanelBody title={ __( 'Descriptions' ) }>
-					<h2>Typography</h2>
 					<FontSizePicker
 						fontSizes={ fontSizes }
 						value={ descriptionsFontSize }
@@ -292,16 +292,18 @@ export default function Edit({ attributes, setAttributes }) {
 							setAttributes( { descriptionsFontSize: newFontSize } )
 						} }
 					/> 
-					<h2>Text Color</h2>
+					<hr />
+					<h3>Text Color</h3>
 					<ColorPalette
 						colors={ colors }
 						value={ descriptionsColor }
 						onChange={ ( newColor ) => setAttributes( {descriptionsColor: newColor} ) }
 					/>
-					<h2>Padding</h2>
+					<hr />
+					<h3>Margin</h3>
 					<BoxControl
-						values={ descriptionsPadding }
-						onChange={ ( p ) => setAttributes( {descriptionsPadding: p} ) }
+						values={ descriptionsMargin }
+						onChange={ ( p ) => setAttributes( {descriptionsMargin: p} ) }
 					/>
 				</PanelBody>
 			</InspectorControls>
@@ -362,10 +364,10 @@ export default function Edit({ attributes, setAttributes }) {
 									{
 										fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
 										color:(tag === 'dt' ? termsColor : descriptionsColor),
-										paddingTop:(tag === 'dt' ? termsPadding?.top : descriptionsPadding?.top),
-										paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
-										paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
-										paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
+										marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
+										marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
+										marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
+										marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
 									}
 								}
 								value={content}
