@@ -14,6 +14,9 @@
             padding: 0;
             margin: 0;
         }
+        dt {
+            float: unset;
+        }
     }
     &.is-style-indent-start {
         dd {
@@ -30,13 +33,11 @@
     &.is-style-grid-1-2,
     &.is-style-grid-1-4 {
         @media only screen and (min-width: 480px) {
-            dt,
-            dd {
+            dt, dd {
                 padding: 0;
-            	margin: 0;
+                margin: 0;
             }
             display: grid;
-            align-items: center;
         }
     }
     &.is-style-grid {
