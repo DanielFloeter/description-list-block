@@ -270,11 +270,22 @@ export default function Edit({ attributes, setAttributes }) {
 
 	const isOneSelected = selectionStart === selectionEnd;
 
-	setAttributes( 
-		{ style: wp.data.select( "core/editor" ).getBlocks().find(
-			e=>e.name==="description-list-block/description-list" && e.clientId === selectionStart
-			)?.attributes.className 
-		} );
+	function findInner(blocks) {
+		for (let block of blocks) {
+			if(block.name==="description-list-block/description-list" && block.clientId === selectionStart){
+				return block;
+			}else if(undefined != block.innerBlocks) {
+				const inner = findInner(block.innerBlocks);
+				if(inner){
+					return inner
+				}
+			}
+		}
+	}
+
+	setAttributes({ 
+		style: findInner(wp.data.select( "core/block-editor" ).getBlocks())?.attributes.className
+	}); 
 
 	return (
 		<>

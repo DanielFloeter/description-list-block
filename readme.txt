@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              block, description list, gutenberg, list
 Requires at least: 5.6
 Tested up to:      5.8
-Stable tag:        1.1.7
+Stable tag:        1.1.8
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -60,6 +60,9 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 6. Seperate Term (dt) and Description (dd) settings
 
 == Changelog ==
+
+= 1.1.8 - December 19th 2021 =
+* Bugfix Inner Blocks
 
 = 1.1.7 - December 18th 2021 =
 * Add indent or spacing option
