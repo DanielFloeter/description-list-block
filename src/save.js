@@ -11,6 +11,9 @@ export default function save({ attributes }) {
 		descriptionsColor,
 		termsMargin,
 		descriptionsMargin,
+		indent,
+		spacing,
+		style,
 	} = attributes;
 	const className = classnames( {
 		[ `has-${ termsFontSize }-term-font-size` ]: termsFontSize,
@@ -35,6 +38,7 @@ export default function save({ attributes }) {
 								marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
 								marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
 								marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
+								marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : ''),
 							}
 						}
 						tagName={tag}
@@ -48,7 +52,9 @@ export default function save({ attributes }) {
 	};
 
 	return (
-		<dl { ...useBlockProps.save( { className } ) }>
+		<dl { ...useBlockProps.save( { className } ) }
+			style={{gridTemplateColumns: (spacing??'33')+'% 2fr'}}
+		>
 			<Section rows={ list } />
 		</dl>
 	);

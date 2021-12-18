@@ -12,6 +12,7 @@ import {
 	FontSizePicker,
 	ColorPalette,
 	__experimentalBoxControl as BoxControl,
+	RangeControl
 } from '@wordpress/components';
 import {
 	tableRowAfter,
@@ -46,6 +47,9 @@ export default function Edit({ attributes, setAttributes }) {
 		descriptionsColor,
 		termsMargin,
 		descriptionsMargin,
+		indent,
+		spacing,
+		style,
 	} = attributes;
 	const blockProps = useBlockProps();
 	const [initialRowCount, setInitialRowCount] = useState(2);
@@ -260,10 +264,48 @@ export default function Edit({ attributes, setAttributes }) {
 		word => word['origin'] !== 'core'
 		);
 
+	const selectionStart = wp.data.select( "core/block-editor" ).getBlockSelectionStart();
+
+	const selectionEnd = wp.data.select( "core/block-editor" ).getBlockSelectionEnd();
+
+	const isOneSelected = selectionStart === selectionEnd;
+
+	setAttributes( 
+		{ style: wp.data.select( "core/editor" ).getBlocks().find(
+			e=>e.name==="description-list-block/description-list" && e.clientId === selectionStart
+			)?.attributes.className 
+		} );
+
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Terms' ) }>
+				{isOneSelected && (
+					<PanelBody title={ __( 'Styles' ) }>
+						{(undefined === style || 'is-style-indent-start-40' === style) && (
+							<RangeControl
+								label="Indent"
+								isShiftStepEnabled={true}
+								value={indent}
+								onChange={ ( newIndent ) => setAttributes( { indent: newIndent } ) }
+								initialPosition={40}
+								min={ 0 }
+								max={ 100 }
+							/>
+						)}
+						{'is-style-grid' === style && (
+							<RangeControl
+								label="Spacing"
+								isShiftStepEnabled={true}
+								value={spacing}
+								onChange={ ( newSpacing ) => setAttributes( { spacing: newSpacing } ) }
+								initialPosition={33}
+								min={ 1 }
+								max={ 100 }
+							/>
+						)}
+					</PanelBody>
+				)}
+				<PanelBody title={ __( 'Defines Term (dt)' ) }>
 						<FontSizePicker
 							fontSizes={ fontSizes }
 							value={ termsFontSize }
@@ -284,7 +326,7 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={ ( p ) => setAttributes( {termsMargin: p} ) }
 						/>
 				</PanelBody>
-				<PanelBody title={ __( 'Descriptions' ) }>
+				<PanelBody title={ __( 'Defines Description (dd)' ) }>
 					<FontSizePicker
 						fontSizes={ fontSizes }
 						value={ descriptionsFontSize }
@@ -312,6 +354,7 @@ export default function Edit({ attributes, setAttributes }) {
 					[ `has-${ termsFontSize }-term-font-size` ]: termsFontSize,
 					[ `has-${ descriptionsFontSize }-descriptions-font-size` ]: descriptionsFontSize,
 				} )}
+				style={{gridTemplateColumns: (spacing??'33')+'% 2fr'}}
 			>
 				{ !isEmpty && (
 					<BlockControls>
@@ -368,6 +411,7 @@ export default function Edit({ attributes, setAttributes }) {
 										marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
 										marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
 										marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
+										marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : ''),
 									}
 								}
 								value={content}

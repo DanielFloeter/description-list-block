@@ -19,6 +19,9 @@
         "descriptionsColor": {},
         "termsMargin": {},
         "descriptionsMargin": {},
+        "indent": {},
+        "spacing": {},
+        "style":{},
         "list": {
             "type": "array",
             "default": [],

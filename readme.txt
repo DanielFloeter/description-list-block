@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              block, description list, gutenberg, list
 Requires at least: 5.6
 Tested up to:      5.8
-Stable tag:        1.1.6
+Stable tag:        1.1.7
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,9 +16,10 @@ Displays a description list using the dl element consist of a series of term and
 Displays a description list or definition list using the `<dl>` element consist of a series of term and description pairs (`<dt>`, `<dd>`) and displays that elements in definition form like a dictionary in the Gutenberg block editor.
 
 = Features =
-* Default, Indent and Grid styles
-* Create a description list with n-elements
+* Indent and Grid styles
+* Indent or spacing settings
 * Color, margin and font-size settings for both element tags
+* Create a description list with n-elements
 * Insert a new term (`<dt>`) and description (`<dd>`) before selection
 * Insert a new term (`<dt>`) and description (`<dd>`) after selection
 * Delete the selcted term (`<dt>`) and description (`<dd>`) pair
@@ -59,6 +60,10 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 6. Seperate Term (dt) and Description (dd) settings
 
 == Changelog ==
+
+= 1.1.7 - December 18th 2021 =
+* Add indent or spacing option
+* Delete obsolete styles Grid 1:4, Grid 1:2, Indent 40 PX
 
 = 1.1.6 - December 14th 2021 =
 * Add styles Grid 1:4, Grid 1:2, Indent 40 PX
