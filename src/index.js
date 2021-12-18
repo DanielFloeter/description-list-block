@@ -56,7 +56,7 @@ registerBlockType(name, {
         },
     },
     styles: [{
-            name: 'indent-start-40',
+            name: 'regular',
             label: _x('Indent', 'description-list-block'),
             isDefault: true,
         },

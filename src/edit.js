@@ -281,7 +281,7 @@ export default function Edit({ attributes, setAttributes }) {
 			<InspectorControls>
 				{isOneSelected && (
 					<PanelBody title={ __( 'Styles' ) }>
-						{(undefined === style || 'is-style-indent-start-40' === style) && (
+						{(undefined === style || 'is-style-regular' === style) && (
 							<RangeControl
 								label="Indent"
 								isShiftStepEnabled={true}

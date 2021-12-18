@@ -7,6 +7,7 @@
 
 .wp-block-description-list-block-description-list {
     // "Float" style variation.
+    &.is-style-regular,
     &.is-style-indent-start,
     &.is-style-indent-start-40 {
         dt,
