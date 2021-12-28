@@ -17,8 +17,24 @@
         "descriptionsFontSize": {},
         "termsColor": {},
         "descriptionsColor": {},
-        "termsMargin": {},
-        "descriptionsMargin": {},
+        "termsMargin": {
+            "type": "Object",
+            "default": {
+                "top":"0px",
+                "right":"0px",
+                "bottom":"0px",
+                "left":"0px"
+            }
+        },
+        "descriptionsMargin": {
+            "type": "Object",
+            "default": {
+                "top":"0px",
+                "right":"0px",
+                "bottom":"0px",
+                "left":"0px"
+            }
+        },
         "indent": {},
         "spacing": {},
         "style":{},

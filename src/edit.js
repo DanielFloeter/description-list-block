@@ -68,7 +68,6 @@ export default function Edit({ attributes, setAttributes }) {
 		setInitialRowCount(count);
 	}
 
-
 	/**
 	 * Inserts a row at the currently selected row index, plus `delta`.
 	 *
@@ -260,7 +259,7 @@ export default function Edit({ attributes, setAttributes }) {
         },
     ];
 
-	const colors = wp.data.select( "core/editor" ).getEditorSettings().colors.filter(
+	const colors = wp.data.select( "core/block-editor" ).getSettings().colors.filter(
 		word => word['origin'] !== 'core'
 		);
 
@@ -285,7 +284,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 	setAttributes({ 
 		style: findInner(wp.data.select( "core/block-editor" ).getBlocks())?.attributes.className
-	}); 
+	});
 
 	return (
 		<>
@@ -334,7 +333,8 @@ export default function Edit({ attributes, setAttributes }) {
 						<h3>Margin</h3>
 						<BoxControl
 							values={ termsMargin }
-							onChange={ ( p ) => setAttributes( {termsMargin: p} ) }
+							onChange={ (value) => {setAttributes({termsMargin: value})} }
+							resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
 						/>
 				</PanelBody>
 				<PanelBody title={ __( 'Defines Description (dd)' ) }>
@@ -356,7 +356,8 @@ export default function Edit({ attributes, setAttributes }) {
 					<h3>Margin</h3>
 					<BoxControl
 						values={ descriptionsMargin }
-						onChange={ ( p ) => setAttributes( {descriptionsMargin: p} ) }
+						onChange={ ( value ) => setAttributes( {descriptionsMargin: value} ) }
+						resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
 					/>
 				</PanelBody>
 			</InspectorControls>
