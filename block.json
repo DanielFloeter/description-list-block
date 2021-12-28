@@ -35,6 +35,24 @@
                 "left":"0px"
             }
         },
+        "termsPadding": {
+            "type": "Object",
+            "default": {
+                "top":"0px",
+                "right":"0px",
+                "bottom":"0px",
+                "left":"0px"
+            }
+        },
+        "descriptionsPadding": {
+            "type": "Object",
+            "default": {
+                "top":"0px",
+                "right":"0px",
+                "bottom":"0px",
+                "left":"0px"
+            }
+        },
         "indent": {},
         "spacing": {},
         "style":{},

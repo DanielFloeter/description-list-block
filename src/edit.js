@@ -47,6 +47,8 @@ export default function Edit({ attributes, setAttributes }) {
 		descriptionsColor,
 		termsMargin,
 		descriptionsMargin,
+		termsPadding,
+		descriptionsPadding,
 		indent,
 		spacing,
 		style,
@@ -336,6 +338,13 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={ (value) => {setAttributes({termsMargin: value})} }
 							resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
 						/>
+						<hr />
+						<h3>Padding</h3>
+						<BoxControl
+							values={ termsPadding }
+							onChange={ (value) => {setAttributes({termsPadding: value})} }
+							resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
+						/>
 				</PanelBody>
 				<PanelBody title={ __( 'Defines Description (dd)' ) }>
 					<FontSizePicker
@@ -357,6 +366,13 @@ export default function Edit({ attributes, setAttributes }) {
 					<BoxControl
 						values={ descriptionsMargin }
 						onChange={ ( value ) => setAttributes( {descriptionsMargin: value} ) }
+						resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
+					/>
+					<hr />
+					<h3>Padding</h3>
+					<BoxControl
+						values={ descriptionsPadding }
+						onChange={ ( value ) => setAttributes( {descriptionsPadding: value} ) }
 						resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
 					/>
 				</PanelBody>
@@ -423,6 +439,10 @@ export default function Edit({ attributes, setAttributes }) {
 										marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
 										marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
 										marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
+										paddingTop:(tag === 'dt' ? termsPadding?.top : descriptionsPadding?.top),
+										paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
+										paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
+										paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
 										marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : ''),
 									}
 								}
