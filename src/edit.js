@@ -1,4 +1,5 @@
 
+import { select, subscribe } from '@wordpress/data';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
@@ -52,6 +53,7 @@ export default function Edit({ attributes, setAttributes }) {
 		indent,
 		spacing,
 		style,
+		ver,
 	} = attributes;
 	const blockProps = useBlockProps();
 	const [initialRowCount, setInitialRowCount] = useState(2);
@@ -60,6 +62,28 @@ export default function Edit({ attributes, setAttributes }) {
 		dt: __('Term ...'),
 		dd: __('Description ...'),
 	};
+
+	/**
+	 * Updates version if saved otherwise let the old verson for render correct if save.js is updated.
+	 * 
+	 * https://wordpress.stackexchange.com/questions/319054/trigger-javascript-on-gutenberg-block-editor-save
+	 * 
+	 * ToDo: Doesn't work in the Block Widget Editor.
+	 *
+	 */
+	const unsubscribe = subscribe(function () {
+		let select = wp.data.select('core/editor');
+		if ( select ) 
+		{ 
+			var isSavingPost = select.isSavingPost();
+			var isAutosavingPost = select.isAutosavingPost();
+			var didPostSaveRequestSucceed = select.didPostSaveRequestSucceed();
+			if (isSavingPost && !isAutosavingPost && didPostSaveRequestSucceed) {
+				unsubscribe();
+				setAttributes({ver:"1.1.9"}); // Current block version
+			}
+		}
+	});
 
 	/**
 	 * Updates the initial row count used for description list creation.

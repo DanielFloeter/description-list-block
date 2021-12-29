@@ -1,3 +1,4 @@
+const semver = require('semver');
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import classnames from 'classnames';
@@ -16,6 +17,7 @@ export default function save({ attributes }) {
 		indent,
 		spacing,
 		style,
+		ver,
 	} = attributes;
 	const className = classnames( {
 		[ `has-${ termsFontSize }-term-font-size` ]: termsFontSize,
@@ -27,12 +29,27 @@ export default function save({ attributes }) {
 			return null;
 		}
 
+		const upgrade = (tag) => {
+			if ( semver.satisfies( ver, "<=1.1.8" ) ) {
+				return { 
+					fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
+					color:(tag === 'dt' ? termsColor : descriptionsColor),
+					marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
+					marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
+					marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
+					marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
+					marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : ''),
+				}
+			}
+		}
+
 		return (
 			rows.map(
 				({ content, tag }, rowIndex) => {
 					return(
 					<RichText.Content
 						style={
+							semver.satisfies(ver, '1.1.9 - 1.1.9') ?
 							{
 								fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
 								color:(tag === 'dt' ? termsColor : descriptionsColor),
@@ -45,7 +62,7 @@ export default function save({ attributes }) {
 								paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
 								paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
 								marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : ''),
-							}
+							} : upgrade( tag )
 						}
 						tagName={tag}
 						value={content}
