@@ -309,7 +309,7 @@ export default function Edit({ attributes, setAttributes }) {
 	}
 
 	setAttributes({ 
-		style: findInner(wp.data.select( "core/block-editor" ).getBlocks())?.attributes.className
+		style: findInner(wp.data.select( "core/block-editor" ).getBlocks())?.attributes.className || style
 	});
 
 	return (
@@ -457,8 +457,7 @@ export default function Edit({ attributes, setAttributes }) {
 							<RichText 
 								tagName={tag}
 								key={rowIndex}
-								style={
-									{
+								style={{...('is-style-no-bloat' !== style) && {
 										fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
 										color:(tag === 'dt' ? termsColor : descriptionsColor),
 										marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
@@ -470,7 +469,7 @@ export default function Edit({ attributes, setAttributes }) {
 										paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
 										paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
 										marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : undefined),
-									}
+									}}
 								}
 								value={content}
 								onChange={onChange}
