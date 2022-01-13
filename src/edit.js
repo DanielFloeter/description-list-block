@@ -80,7 +80,7 @@ export default function Edit({ attributes, setAttributes }) {
 			var didPostSaveRequestSucceed = select.didPostSaveRequestSucceed();
 			if (isSavingPost && !isAutosavingPost && didPostSaveRequestSucceed) {
 				unsubscribe();
-				setAttributes({ver:"1.1.9"}); // Current block version
+				setAttributes({ver:"1.1.10"}); // Current block version
 			}
 		}
 	});
@@ -314,34 +314,35 @@ export default function Edit({ attributes, setAttributes }) {
 
 	return (
 		<>
-			<InspectorControls>
-				{isOneSelected && (
-					<PanelBody title={ __( 'Styles' ) }>
-						{(undefined === style || 'is-style-regular' === style) && (
-							<RangeControl
-								label="Indent"
-								isShiftStepEnabled={true}
-								value={indent}
-								onChange={ ( newIndent ) => setAttributes( { indent: newIndent } ) }
-								initialPosition={40}
-								min={ 0 }
-								max={ 100 }
-							/>
-						)}
-						{'is-style-grid' === style && (
-							<RangeControl
-								label="Spacing"
-								isShiftStepEnabled={true}
-								value={spacing}
-								onChange={ ( newSpacing ) => setAttributes( { spacing: newSpacing } ) }
-								initialPosition={33}
-								min={ 1 }
-								max={ 100 }
-							/>
-						)}
-					</PanelBody>
-				)}
-				<PanelBody title={ __( 'Defines Term (dt)' ) }>
+			{'is-style-no-bloat' !== style && (
+				<InspectorControls>
+					{isOneSelected && (
+						<PanelBody title={ __( 'Settings' ) }>
+							{(undefined === style || 'is-style-regular' === style) && (
+								<RangeControl
+									label="Indent"
+									isShiftStepEnabled={true}
+									value={indent}
+									onChange={ ( newIndent ) => setAttributes( { indent: newIndent } ) }
+									initialPosition={40}
+									min={ 0 }
+									max={ 100 }
+								/>
+							)}
+							{'is-style-grid' === style && (
+								<RangeControl
+									label="Spacing"
+									isShiftStepEnabled={true}
+									value={spacing}
+									onChange={ ( newSpacing ) => setAttributes( { spacing: newSpacing } ) }
+									initialPosition={33}
+									min={ 1 }
+									max={ 100 }
+								/>
+							)}
+						</PanelBody>
+					)}
+					<PanelBody title={ __( 'Defines Term (dt)' ) }>
 						<FontSizePicker
 							fontSizes={ fontSizes }
 							value={ termsFontSize }
@@ -369,38 +370,39 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={ (value) => {setAttributes({termsPadding: value})} }
 							resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
 						/>
-				</PanelBody>
-				<PanelBody title={ __( 'Defines Description (dd)' ) }>
-					<FontSizePicker
-						fontSizes={ fontSizes }
-						value={ descriptionsFontSize }
-						onChange={ ( newFontSize ) => {
-							setAttributes( { descriptionsFontSize: newFontSize } )
-						} }
-					/> 
-					<hr />
-					<h3>Text Color</h3>
-					<ColorPalette
-						colors={ colors }
-						value={ descriptionsColor }
-						onChange={ ( newColor ) => setAttributes( {descriptionsColor: newColor} ) }
-					/>
-					<hr />
-					<h3>Margin</h3>
-					<BoxControl
-						values={ descriptionsMargin }
-						onChange={ ( value ) => setAttributes( {descriptionsMargin: value} ) }
-						resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
-					/>
-					<hr />
-					<h3>Padding</h3>
-					<BoxControl
-						values={ descriptionsPadding }
-						onChange={ ( value ) => setAttributes( {descriptionsPadding: value} ) }
-						resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
-					/>
-				</PanelBody>
-			</InspectorControls>
+					</PanelBody>
+					<PanelBody title={ __( 'Defines Description (dd)' ) }>
+						<FontSizePicker
+							fontSizes={ fontSizes }
+							value={ descriptionsFontSize }
+							onChange={ ( newFontSize ) => {
+								setAttributes( { descriptionsFontSize: newFontSize } )
+							} }
+						/> 
+						<hr />
+						<h3>Text Color</h3>
+						<ColorPalette
+							colors={ colors }
+							value={ descriptionsColor }
+							onChange={ ( newColor ) => setAttributes( {descriptionsColor: newColor} ) }
+						/>
+						<hr />
+						<h3>Margin</h3>
+						<BoxControl
+							values={ descriptionsMargin }
+							onChange={ ( value ) => setAttributes( {descriptionsMargin: value} ) }
+							resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
+						/>
+						<hr />
+						<h3>Padding</h3>
+						<BoxControl
+							values={ descriptionsPadding }
+							onChange={ ( value ) => setAttributes( {descriptionsPadding: value} ) }
+							resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
+						/>
+					</PanelBody>
+				</InspectorControls>
+			)}
 			<dl {...blockProps}
 				className={classnames( blockProps.className, {
 					[ `has-${ termsFontSize }-term-font-size` ]: termsFontSize,
@@ -467,7 +469,7 @@ export default function Edit({ attributes, setAttributes }) {
 										paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
 										paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
 										paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
-										marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : ''),
+										marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : undefined),
 									}
 								}
 								value={content}

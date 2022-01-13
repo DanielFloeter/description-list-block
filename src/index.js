@@ -56,13 +56,17 @@ registerBlockType(name, {
         },
     },
     styles: [{
-            name: 'regular',
+        name: 'regular',
             label: _x('Indent', 'description-list-block'),
             isDefault: true,
         },
         {
             name: 'grid',
             label: __('Grid')
+        },
+        {
+            name: 'no-bloat',
+            label: __('Disable Block CSS')
         },
 
     ],

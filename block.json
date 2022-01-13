@@ -15,7 +15,7 @@
     "attributes": {
         "ver": {
             "type": "string",
-            "default": "1.1.9"
+            "default": "1.1.10"
         },
         "termsFontSize": {},
         "descriptionsFontSize": {},

@@ -29,18 +29,23 @@ export default function save({ attributes }) {
 			return null;
 		}
 
-		const upgrade = (tag) => {
-			if ( semver.satisfies( ver, "<=1.1.8" ) ) {
-				return { 
-					fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
-					color:(tag === 'dt' ? termsColor : descriptionsColor),
-					marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
-					marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
-					marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
-					marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
-					marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : ''),
-				}
-			}
+		const v1_1_8 = tag => semver.satisfies(ver, '>=1.1.8') &&
+		{
+			fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
+			color:(tag === 'dt' ? termsColor : descriptionsColor),
+			marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
+			marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
+			marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
+			marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
+			marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : undefined),
+		}
+
+		const v1_1_9 = tag => semver.satisfies(ver, '>=1.1.9') &&
+		{
+			paddingTop:(tag === 'dt' ? termsPadding?.top : descriptionsPadding?.top),
+			paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
+			paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
+			paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
 		}
 
 		return (
@@ -48,22 +53,7 @@ export default function save({ attributes }) {
 				({ content, tag }, rowIndex) => {
 					return(
 					<RichText.Content
-						style={
-							semver.satisfies(ver, '1.1.9 - 1.1.9') ?
-							{
-								fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
-								color:(tag === 'dt' ? termsColor : descriptionsColor),
-								marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
-								marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
-								marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
-								marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
-								paddingTop:(tag === 'dt' ? termsPadding?.top : descriptionsPadding?.top),
-								paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
-								paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
-								paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
-								marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : ''),
-							} : upgrade( tag )
-						}
+						style={'is-style-no-bloat' !== style && {...v1_1_8(tag), ...v1_1_9(tag)}}
 						tagName={tag}
 						value={content}
 						key={rowIndex}
@@ -76,7 +66,7 @@ export default function save({ attributes }) {
 
 	return (
 		<dl { ...useBlockProps.save( { className } ) }
-			style={{gridTemplateColumns: (spacing??'33')+'% 2fr'}}
+			style={'is-style-grid' === style && {gridTemplateColumns: (spacing??'33')+'% 2fr'}}
 		>
 			<Section rows={ list } />
 		</dl>
