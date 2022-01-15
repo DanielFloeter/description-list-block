@@ -57,8 +57,14 @@
                 "left":"0px"
             }
         },
-        "indent": {},
-        "spacing": {},
+        "indent": {
+            "type": "integer",
+            "default": 10
+        },
+        "spacing": {
+            "type": "integer",
+            "default": 30
+        },
         "style":{},
         "list": {
             "type": "array",

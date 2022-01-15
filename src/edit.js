@@ -314,17 +314,17 @@ export default function Edit({ attributes, setAttributes }) {
 
 	return (
 		<>
-			{'is-style-no-bloat' !== style && (
+			{('is-style-regular' === style || 'is-style-grid' === style) && (
 				<InspectorControls>
 					{isOneSelected && (
 						<PanelBody title={ __( 'Settings' ) }>
-							{(undefined === style || 'is-style-regular' === style) && (
+							{('is-style-regular' === style) && (
 								<RangeControl
 									label="Indent"
 									isShiftStepEnabled={true}
 									value={indent}
 									onChange={ ( newIndent ) => setAttributes( { indent: newIndent } ) }
-									initialPosition={40}
+									initialPosition={10}
 									min={ 0 }
 									max={ 100 }
 								/>
@@ -335,7 +335,7 @@ export default function Edit({ attributes, setAttributes }) {
 									isShiftStepEnabled={true}
 									value={spacing}
 									onChange={ ( newSpacing ) => setAttributes( { spacing: newSpacing } ) }
-									initialPosition={33}
+									initialPosition={30}
 									min={ 1 }
 									max={ 100 }
 								/>
@@ -408,7 +408,7 @@ export default function Edit({ attributes, setAttributes }) {
 					[ `has-${ termsFontSize }-term-font-size` ]: termsFontSize,
 					[ `has-${ descriptionsFontSize }-descriptions-font-size` ]: descriptionsFontSize,
 				} )}
-				style={{gridTemplateColumns: (spacing??'33')+'% 2fr'}}
+				style={{...('is-style-grid' === style) && {gridTemplateColumns: `${spacing}% 2fr`}}}
 			>
 				{ !isEmpty && (
 					<BlockControls>
@@ -457,7 +457,7 @@ export default function Edit({ attributes, setAttributes }) {
 							<RichText 
 								tagName={tag}
 								key={rowIndex}
-								style={{...('is-style-no-bloat' !== style) && {
+								style={{...('is-style-regular' === style || 'is-style-grid' === style) && {
 										fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
 										color:(tag === 'dt' ? termsColor : descriptionsColor),
 										marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
@@ -468,7 +468,7 @@ export default function Edit({ attributes, setAttributes }) {
 										paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
 										paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
 										paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
-										marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : undefined),
+										marginInlineStart:(tag === 'dd' && 'is-style-regular' === style && 0 <= indent ? `${indent}%` : undefined),
 									}}
 								}
 								value={content}

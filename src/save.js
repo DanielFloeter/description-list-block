@@ -34,7 +34,7 @@ export default function save({ attributes }) {
 				({ content, tag }, rowIndex) => {
 					return(
 					<RichText.Content
-						style={'is-style-no-bloat' !== style && {
+						style={('is-style-regular' === style || 'is-style-grid' === style) && {
 							...semver.satisfies(ver, '>=1.1.8') && {
 								fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
 								color:(tag === 'dt' ? termsColor : descriptionsColor),
@@ -42,7 +42,7 @@ export default function save({ attributes }) {
 								marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
 								marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
 								marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
-								marginInlineStart:(tag === 'dd' && 'is-style-grid' !== style && 0 <= indent ? indent+'%' : undefined),
+								marginInlineStart:(tag === 'dd' && 'is-style-regular' === style && 0 <= indent ? `${indent}%` : undefined),
 							}, 
 							...semver.satisfies(ver, '>=1.1.9') && {
 								paddingTop:(tag === 'dt' ? termsPadding?.top : descriptionsPadding?.top),
@@ -62,7 +62,7 @@ export default function save({ attributes }) {
 
 	return (
 		<dl { ...useBlockProps.save( { className } ) }
-			style={'is-style-grid' === style && {gridTemplateColumns: (spacing??'33')+'% 2fr'}}
+			style={'is-style-grid' === style && {gridTemplateColumns: `${spacing}% 2fr`}}
 		>
 			<Section rows={ list } />
 		</dl>
