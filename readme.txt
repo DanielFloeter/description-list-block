@@ -3,7 +3,7 @@ Contributors:      kometschuh
 Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              block, description list, gutenberg, list
 Requires at least: 5.6
-Tested up to:      5.8
+Tested up to:      5.9
 Stable tag:        1.1.10
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
@@ -14,6 +14,9 @@ Displays a description list using the dl element consist of a series of term and
 == Description ==
 
 Displays a description list or definition list using the `<dl>` element consist of a series of term and description pairs (`<dt>`, `<dd>`) and displays that elements in definition form like a dictionary in the Gutenberg block editor.
+
+= Tip Top Press =
+We're [Tip Top Press](http://tiptoppress.com/) and create Gutenberg Blocks for Wordpress. If you want to know about what we're working on and you are interested in backgrounds then you can read all newes storys on our [blog](http://tiptoppress.com/blog/?utm_source=wp.org&utm_medium=readme.txt&utm_campaign=description+list+block).
 
 = Features =
 * Indent-, Grid and Disable Block CSS Block Styles
