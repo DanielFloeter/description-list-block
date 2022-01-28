@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              block, description list, gutenberg, list
 Requires at least: 5.6
 Tested up to:      5.9
-Stable tag:        1.1.10
+Stable tag:        1.1.11
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -63,6 +63,9 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 6. Seperate Term (dt) and Description (dd) settings
 
 == Changelog ==
+
+= 1.1.11 - January 28th 2022 =
+* Bugfix Shortcuts with WordPress 5.9
 
 = 1.1.10 - January 13th 2022 =
 * Add Block Style Disable Block CSS

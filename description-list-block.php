@@ -3,7 +3,7 @@
  * Plugin Name:     Description List Block
  * Plugin URI:      https://wordpress.org/plugins/description-list-block/
  * Description:     Displays a description list using the dl element consist of a series of term and description pairs (dt, dd).
- * Version:         1.1.10
+ * Version:         1.1.11
  * Author:          TipTopPress
  * Author URI:      http://tiptoppress.com
  * License:         GPL-2.0-or-later

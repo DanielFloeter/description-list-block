@@ -80,7 +80,7 @@ export default function Edit({ attributes, setAttributes }) {
 			var didPostSaveRequestSucceed = select.didPostSaveRequestSucceed();
 			if (isSavingPost && !isAutosavingPost && didPostSaveRequestSucceed) {
 				unsubscribe();
-				setAttributes({ver:"1.1.10"}); // Current block version
+				setAttributes({ver:"1.1.11"}); // Current block version
 			}
 		}
 	});
@@ -427,7 +427,7 @@ export default function Edit({ attributes, setAttributes }) {
 						</ToolbarGroup>
 					</BlockControls>
 				)}
-				{ !isEmpty && (
+				{/* { !isEmpty && (
 					<>
 						<RichTextShortcut
 							type="primary"
@@ -444,13 +444,13 @@ export default function Edit({ attributes, setAttributes }) {
 							character="y"
 							onUse={ onDelete }
 						/>
-						{/* <RichTextShortcut
+						<RichTextShortcut
 							type="primary"
 							character="ENTER"
 							onUse={ onEnter }
-						/> */}
+						/>
 					</>
-				)}
+				)} */}
 				{ !isEmpty && (
 					attributes['list'].map(
 						({ content, tag }, rowIndex) => (
