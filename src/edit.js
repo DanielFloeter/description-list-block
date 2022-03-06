@@ -12,7 +12,8 @@ import {
 	ToolbarItem,
 	FontSizePicker,
 	ColorPalette,
-	__experimentalBoxControl as BoxControl,
+	__experimentalBoxControl,
+	BoxControl as stableBoxControl,
 	RangeControl
 } from '@wordpress/components';
 import {
@@ -39,6 +40,8 @@ import {
 } from './state';
 import classnames from 'classnames';
 import { ENTER, SHIFT, UP } from '@wordpress/keycodes';
+
+export const BoxControl = __experimentalBoxControl || stableBoxControl;
 
 export default function Edit({ attributes, setAttributes }) {
 	const { 
@@ -80,7 +83,7 @@ export default function Edit({ attributes, setAttributes }) {
 			var didPostSaveRequestSucceed = select.didPostSaveRequestSucceed();
 			if (isSavingPost && !isAutosavingPost && didPostSaveRequestSucceed) {
 				unsubscribe();
-				setAttributes({ver:"1.1.11"}); // Current block version
+				setAttributes({ver:"1.1.12"}); // Current block version
 			}
 		}
 	});
