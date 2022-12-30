@@ -55,8 +55,6 @@ export default function Edit({ attributes, setAttributes }) {
 		descriptionsPadding,
 		indent,
 		spacing,
-		style,
-		ver,
 	} = attributes;
 	const blockProps = useBlockProps();
 	const [initialRowCount, setInitialRowCount] = useState(2);
@@ -311,17 +309,13 @@ export default function Edit({ attributes, setAttributes }) {
 		}
 	}
 
-	setAttributes({ 
-		style: findInner(wp.data.select( "core/block-editor" ).getBlocks())?.attributes.className || style
-	});
-
 	return (
 		<>
-			{('is-style-regular' === style || 'is-style-grid' === style) && (
+			{(/is-style-regular/.test( blockProps.className ) || /is-style-grid/.test( blockProps.className )) && (
 				<InspectorControls>
 					{isOneSelected && (
 						<PanelBody title={ __( 'Settings' ) }>
-							{('is-style-regular' === style) && (
+							{(/is-style-regular/.test( blockProps.className )) && (
 								<RangeControl
 									label="Indent"
 									isShiftStepEnabled={true}
@@ -332,7 +326,7 @@ export default function Edit({ attributes, setAttributes }) {
 									max={ 100 }
 								/>
 							)}
-							{'is-style-grid' === style && (
+							{/is-style-grid/.test( blockProps.className ) && (
 								<RangeControl
 									label="Spacing"
 									isShiftStepEnabled={true}
@@ -411,7 +405,7 @@ export default function Edit({ attributes, setAttributes }) {
 					[ `has-${ termsFontSize }-term-font-size` ]: termsFontSize,
 					[ `has-${ descriptionsFontSize }-descriptions-font-size` ]: descriptionsFontSize,
 				} )}
-				style={{...('is-style-grid' === style) && {gridTemplateColumns: `${spacing}% 2fr`}}}
+				style={{...(/is-style-grid/.test( blockProps.className )) && {gridTemplateColumns: `${spacing}% 2fr`}}}
 			>
 				{ !isEmpty && (
 					<BlockControls>
@@ -460,7 +454,7 @@ export default function Edit({ attributes, setAttributes }) {
 							<RichText 
 								tagName={tag}
 								key={rowIndex}
-								style={{...('is-style-regular' === style || 'is-style-grid' === style) && {
+								style={{...(/is-style-regular/.test( blockProps.className ) || /is-style-grid/.test( blockProps.className )) && {
 										fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
 										color:(tag === 'dt' ? termsColor : descriptionsColor),
 										marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
@@ -471,7 +465,7 @@ export default function Edit({ attributes, setAttributes }) {
 										paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
 										paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
 										paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
-										marginInlineStart:(tag === 'dd' && 'is-style-regular' === style && 0 <= indent ? `${indent}%` : undefined),
+										marginInlineStart:(tag === 'dd' && /is-style-regular/.test( blockProps.className ) && 0 <= indent ? `${indent}%` : undefined),
 									}}
 								}
 								value={content}
