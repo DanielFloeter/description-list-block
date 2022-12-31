@@ -81,7 +81,7 @@ export default function Edit({ attributes, setAttributes }) {
 			var didPostSaveRequestSucceed = select.didPostSaveRequestSucceed();
 			if (isSavingPost && !isAutosavingPost && didPostSaveRequestSucceed) {
 				unsubscribe();
-				setAttributes({ver:"1.1.12"}); // Current block version
+				setAttributes({ver:"1.1.13"}); // Current block version
 			}
 		}
 	});
@@ -309,13 +309,15 @@ export default function Edit({ attributes, setAttributes }) {
 		}
 	}
 
+	const styleRegular = /is-style-regular/.test( blockProps.className ) || ! /is-style-grid/.test( blockProps.className ) && ! /is-style-no-bloat/.test( blockProps.className );
+
 	return (
 		<>
-			{(/is-style-regular/.test( blockProps.className ) || /is-style-grid/.test( blockProps.className )) && (
+			{( styleRegular || /is-style-grid/.test( blockProps.className ) ) && (
 				<InspectorControls>
 					{isOneSelected && (
 						<PanelBody title={ __( 'Settings' ) }>
-							{(/is-style-regular/.test( blockProps.className )) && (
+							{( styleRegular ) && (
 								<RangeControl
 									label="Indent"
 									isShiftStepEnabled={true}
@@ -454,7 +456,7 @@ export default function Edit({ attributes, setAttributes }) {
 							<RichText 
 								tagName={tag}
 								key={rowIndex}
-								style={{...(/is-style-regular/.test( blockProps.className ) || /is-style-grid/.test( blockProps.className )) && {
+								style={{...( styleRegular || /is-style-grid/.test( blockProps.className )) && {
 										fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
 										color:(tag === 'dt' ? termsColor : descriptionsColor),
 										marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
@@ -465,7 +467,7 @@ export default function Edit({ attributes, setAttributes }) {
 										paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
 										paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
 										paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
-										marginInlineStart:(tag === 'dd' && /is-style-regular/.test( blockProps.className ) && 0 <= indent ? `${indent}%` : undefined),
+										marginInlineStart:(tag === 'dd' && styleRegular && 0 <= indent ? `${indent}%` : undefined),
 									}}
 								}
 								value={content}

@@ -24,6 +24,8 @@ export default function save({ attributes }) {
 	} );
 	const blockProps = useBlockProps.save();
 
+	const styleRegular = /is-style-regular/.test( blockProps.className ) || ! /is-style-grid/.test( blockProps.className ) && ! /is-style-no-bloat/.test( blockProps.className );
+
 	const Section = ( { rows } ) => {
 		if ( ! rows.length ) {
 			return null;
@@ -34,7 +36,7 @@ export default function save({ attributes }) {
 				({ content, tag }, rowIndex) => {
 					return(
 					<RichText.Content
-						style={(/is-style-regular/.test( blockProps.className ) || /is-style-grid/.test( blockProps.className )) && {
+						style={(styleRegular || /is-style-grid/.test( blockProps.className )) && {
 							...semver.satisfies(ver, '>=1.1.8') && {
 								fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
 								color:(tag === 'dt' ? termsColor : descriptionsColor),
@@ -42,7 +44,7 @@ export default function save({ attributes }) {
 								marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
 								marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
 								marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
-								marginInlineStart:(tag === 'dd' && /is-style-regular/.test( blockProps.className ) && 0 <= indent ? `${indent}%` : undefined),
+								marginInlineStart:(tag === 'dd' && styleRegular && 0 <= indent ? `${indent}%` : undefined),
 							}, 
 							...semver.satisfies(ver, '>=1.1.9') && {
 								paddingTop:(tag === 'dt' ? termsPadding?.top : descriptionsPadding?.top),
