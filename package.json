@@ -14,12 +14,14 @@
         "packages-update": "wp-scripts packages-update"
     },
     "dependencies": {
-        "@wordpress/block-editor": "^5.3.0",
-        "@wordpress/blocks": "^8.0.0",
-        "@wordpress/i18n": "^3.19.0",
-        "semver": "^6.3.0"
+        "@wordpress/block-editor": "^11.1.0",
+        "@wordpress/blocks": "^12.1.0",
+        "@wordpress/data": "^8.1.0",
+        "@wordpress/i18n": "^4.24.0",
+        "lodash": "^4.17.21",
+        "semver": "^7.3.8"
     },
     "devDependencies": {
-        "@wordpress/scripts": "^14.0.1"
+        "@wordpress/scripts": "^25.1.0"
     }
 }
