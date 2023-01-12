@@ -1,4 +1,3 @@
-const semver = require('semver');
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import classnames from 'classnames';
@@ -16,7 +15,6 @@ export default function save({ attributes }) {
 		descriptionsPadding,
 		indent,
 		spacing,
-		ver,
 	} = attributes;
 	const className = classnames( {
 		[ `has-${ termsFontSize }-term-font-size` ]: termsFontSize,
@@ -36,8 +34,7 @@ export default function save({ attributes }) {
 				({ content, tag }, rowIndex) => {
 					return(
 					<RichText.Content
-						style={(styleRegular || /is-style-grid/.test( blockProps.className )) && {
-							...semver.satisfies(ver, '>=1.1.8') && {
+						style={ ( styleRegular || /is-style-grid/.test( blockProps.className ) ) && {
 								fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
 								color:(tag === 'dt' ? termsColor : descriptionsColor),
 								marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
@@ -45,13 +42,12 @@ export default function save({ attributes }) {
 								marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
 								marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
 								marginInlineStart:(tag === 'dd' && styleRegular && 0 <= indent ? `${indent}%` : undefined),
-							}, 
-							...semver.satisfies(ver, '>=1.1.9') && {
 								paddingTop:(tag === 'dt' ? termsPadding?.top : descriptionsPadding?.top),
 								paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
 								paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
 								paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
-							}}}
+							}
+						}
 						tagName={tag}
 						value={content}
 						key={rowIndex}

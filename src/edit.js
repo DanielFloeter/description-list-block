@@ -1,5 +1,4 @@
 
-import { select, subscribe } from '@wordpress/data';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
@@ -27,7 +26,6 @@ import {
 	RichText,
 	BlockIcon,
 	useBlockProps,
-	RichTextShortcut,
 } from '@wordpress/block-editor';
 
 import './editor.scss';
@@ -63,28 +61,6 @@ export default function Edit({ attributes, setAttributes }) {
 		dt: __('Term ...'),
 		dd: __('Description ...'),
 	};
-
-	/**
-	 * Updates version if saved otherwise let the old verson for render correct if save.js is updated.
-	 * 
-	 * https://wordpress.stackexchange.com/questions/319054/trigger-javascript-on-gutenberg-block-editor-save
-	 * 
-	 * ToDo: Doesn't work in the Block Widget Editor.
-	 *
-	 */
-	const unsubscribe = subscribe(function () {
-		let select = wp.data.select('core/editor');
-		if ( select ) 
-		{ 
-			var isSavingPost = select.isSavingPost();
-			var isAutosavingPost = select.isAutosavingPost();
-			var didPostSaveRequestSucceed = select.didPostSaveRequestSucceed();
-			if (isSavingPost && !isAutosavingPost && didPostSaveRequestSucceed) {
-				unsubscribe();
-				setAttributes({ver:"1.1.13"}); // Current block version
-			}
-		}
-	});
 
 	/**
 	 * Updates the initial row count used for description list creation.
@@ -243,19 +219,19 @@ export default function Edit({ attributes, setAttributes }) {
 	const tableControls = [
 		{
 			icon: tableRowBefore,
-			title: __('Insert before (Cmd/Shift+E)'),
+			title: __('Insert before'),
 			isDisabled: !selectedCell,
 			onClick: onInsertListPairBefore,
 		},
 		{
 			icon: tableRowAfter,
-			title: __('Insert after (Cmd/Shift+D)'),
+			title: __('Insert after'),
 			isDisabled: !selectedCell,
 			onClick: onInsertListPairAfter,
 		},
 		{
 			icon: tableRowDelete,
-			title: __('Delete selected (Cmd/Shift+Y)'),
+			title: __('Delete selected'),
 			isDisabled: !selectedCell,
 			onClick: onDeleteListPair,
 		},
@@ -295,19 +271,6 @@ export default function Edit({ attributes, setAttributes }) {
 	const selectionEnd = wp.data.select( "core/block-editor" ).getBlockSelectionEnd();
 
 	const isOneSelected = selectionStart === selectionEnd;
-
-	function findInner(blocks) {
-		for (let block of blocks) {
-			if(block.name==="description-list-block/description-list" && block.clientId === selectionStart){
-				return block;
-			}else if(undefined != block.innerBlocks) {
-				const inner = findInner(block.innerBlocks);
-				if(inner){
-					return inner
-				}
-			}
-		}
-	}
 
 	const styleRegular = /is-style-regular/.test( blockProps.className ) || ! /is-style-grid/.test( blockProps.className ) && ! /is-style-no-bloat/.test( blockProps.className );
 

@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              block, description list, gutenberg, list
 Requires at least: 5.6
 Tested up to:      6.1
-Stable tag:        1.1.13
+Stable tag:        1.2.0
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -27,12 +27,6 @@ We're [Tip Top Press](http://tiptoppress.com/) and create Gutenberg Blocks for W
 * Insert a new term (`<dt>`) and description (`<dd>`) after selection
 * Delete the selcted term (`<dt>`) and description (`<dd>`) pair
 * Access via Shortcuts
-
-= Shortcuts =
-* Cmd(⌘)+E (Mac) or Shift+E (Window): Insert before selection
-* Cmd(⌘)+D (Mac) or Shift+D (Window)): Insert after selection
-* Cmd(⌘)+Y (Mac) or Shift+Y (Window)): Delete selection
-* Shift+ENTER (Mac or Window): Line break (`<br>`)
 
 = Contribute =
 While using this plugin if you find any bug or any conflict, please submit an issue at [Github](https://github.com/DanielFloeter/description-list-block) (If possible with a pull request).
@@ -63,6 +57,10 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 6. Seperate Term (dt) and Description (dd) settings
 
 == Changelog ==
+
+= 1.2.0 - January 12th 2023 =
+* Remove Shortcuts
+* Bugfix Slow save
 
 = 1.1.13 - December 31th 2022 =
 * Bugfix Update component inside a function body of a different component
