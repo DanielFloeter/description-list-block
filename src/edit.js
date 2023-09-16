@@ -435,7 +435,7 @@ export default function Edit({ attributes, setAttributes }) {
 								}
 								value={content}
 								onChange={onChange}
-								unstableOnFocus={() => {
+								onFocus={() => {
 									setSelectedCell({
 										sectionName: 'list',
 										rowIndex,
