@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              block, description list, gutenberg, list
 Requires at least: 5.6
 Tested up to:      6.3 
-Stable tag:        1.2.1
+Stable tag:        1.2.2
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -58,7 +58,10 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 
 == Changelog ==
 
-= 1.2.0 - September 16th 2023 =
+= 1.2.2 - September 26th 2023 =
+* Use CSS selectors
+
+= 1.2.1 - September 16th 2023 =
 * Bugfix OnFocus WP 6.3 ready
 
 = 1.2.0 - January 12th 2023 =

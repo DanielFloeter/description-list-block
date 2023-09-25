@@ -61,6 +61,75 @@ const v1 = {
     }
 };
 
+const v2 = {
+    ...metadata,
+
+	save( { attributes } ) {
+        const { 
+            list, 
+            termsFontSize, 
+            descriptionsFontSize, 
+            termsColor, 
+            descriptionsColor,
+            termsMargin,
+            descriptionsMargin,
+            termsPadding,
+            descriptionsPadding,
+            indent,
+            spacing,
+        } = attributes;
+        const className = classnames( {
+            [ `has-${ termsFontSize }-term-font-size` ]: termsFontSize,
+            [ `has-${ descriptionsFontSize }-descriptions-font-size` ]: descriptionsFontSize,
+        } );
+        const blockProps = useBlockProps.save();
+    
+        const styleRegular = /is-style-regular/.test( blockProps.className ) || ! /is-style-grid/.test( blockProps.className ) && ! /is-style-no-bloat/.test( blockProps.className );
+    
+        const Section = ( { rows } ) => {
+            if ( ! rows.length ) {
+                return null;
+            }
+    
+            return (
+                rows.map(
+                    ({ content, tag }, rowIndex) => {
+                        return(
+                        <RichText.Content
+                            style={ ( styleRegular || /is-style-grid/.test( blockProps.className ) ) && {
+                            		fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
+                            		color:(tag === 'dt' ? termsColor : descriptionsColor),
+                            		marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
+                            		marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
+                            		marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
+                            		marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
+                            		marginInlineStart:(tag === 'dd' && styleRegular && 0 <= indent ? `${indent}%` : undefined),
+                            		paddingTop:(tag === 'dt' ? termsPadding?.top : descriptionsPadding?.top),
+                            		paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
+                            		paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
+                            		paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
+                            	}
+                            }
+                            tagName={tag}
+                            value={content}
+                            key={rowIndex}
+                        />
+                        );
+                    }
+                )
+            );
+        };
+    
+        return (
+            <dl { ...useBlockProps.save( { className } ) }
+                style={/is-style-grid/.test( blockProps.className ) && {gridTemplateColumns: `${spacing}% 2fr`}}
+            >
+                <Section rows={ list } />
+            </dl>
+        );
+    }
+};
+
 
 /**
  * New deprecations need to be placed first
@@ -70,4 +139,4 @@ const v1 = {
  *
  * See block-deprecation.md
  */
-export default [ v1 ];
+export default [ v2, v1 ];

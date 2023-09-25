@@ -42,8 +42,8 @@ import { ENTER, SHIFT, UP } from '@wordpress/keycodes';
 export const BoxControl = __experimentalBoxControl || stableBoxControl;
 
 export default function Edit({ attributes, setAttributes }) {
-	const { 
-		termsFontSize, 
+	const {
+		termsFontSize,
 		descriptionsFontSize,
 		termsColor,
 		descriptionsColor,
@@ -166,42 +166,42 @@ export default function Edit({ attributes, setAttributes }) {
 		);
 	}
 
-	function onEnter() { 
+	function onEnter() {
 
 		const { sectionName, rowIndex } = selectedCell;
-			const tag = rowIndex % 2 ? 'dd' : 'dt';
-			switch (tag) {
-				case 'dt':
-					// setSelectedCell({
-					// 	sectionName: 'list',
-					// 	rowIndex: rowIndex + 2,
-					// 	type: 'cell',
-					// });
+		const tag = rowIndex % 2 ? 'dd' : 'dt';
+		switch (tag) {
+			case 'dt':
+				// setSelectedCell({
+				// 	sectionName: 'list',
+				// 	rowIndex: rowIndex + 2,
+				// 	type: 'cell',
+				// });
 				break;
-				case 'dd':
-					const delta = 2;
-					const { sectionName, rowIndex } = selectedCell;
-					const listPairIndex = rowIndex - (rowIndex % 2);
-					const newRowIndex = listPairIndex + delta;
-					
-					setAttributes(
-						insertListPair(attributes, {
-							sectionName,
-							rowIndex: newRowIndex,
-						})
-					);
+			case 'dd':
+				const delta = 2;
+				const { sectionName, rowIndex } = selectedCell;
+				const listPairIndex = rowIndex - (rowIndex % 2);
+				const newRowIndex = listPairIndex + delta;
 
-					setSelectedCell({
-						sectionName: 'list',
-						rowIndex: newRowIndex - 1,
-						type: 'cell',
-					});
-					break;
-				}
+				setAttributes(
+					insertListPair(attributes, {
+						sectionName,
+						rowIndex: newRowIndex,
+					})
+				);
 
-			// setTimeout( (target) => { 
-			// 	jQuery(target).next().focus(); 
-			// }, 0, event.target );
+				setSelectedCell({
+					sectionName: 'list',
+					rowIndex: newRowIndex - 1,
+					type: 'cell',
+				});
+				break;
+		}
+
+		// setTimeout( (target) => { 
+		// 	jQuery(target).next().focus(); 
+		// }, 0, event.target );
 	}
 
 	function onUP() {
@@ -240,139 +240,139 @@ export default function Edit({ attributes, setAttributes }) {
 	const isEmpty = isEmptyDescriptionList(attributes['list']);
 
 	const fontSizes = [
-        {
-            name: __( 'Small' ),
-            slug: 'small',
-            size: 18,
-        },
-        {
-            name: __( 'Normal' ),
-            slug: 'normal',
-            size: 21,
-        },
-        {
-            name: __( 'Large' ),
-            slug: 'large',
-            size: 26,
-        },
 		{
-            name: __( 'Huge' ),
-            slug: 'huge',
-            size: 32,
-        },
-    ];
+			name: __('Small'),
+			slug: 'small',
+			size: '18px',
+		},
+		{
+			name: __('Normal'),
+			slug: 'normal',
+			size: '21px',
+		},
+		{
+			name: __('Large'),
+			slug: 'large',
+			size: '26px',
+		},
+		{
+			name: __('Huge'),
+			slug: 'huge',
+			size: '32px',
+		},
+	];
 
-	const colors = wp.data.select( "core/block-editor" ).getSettings().colors.filter(
+	const colors = wp.data.select("core/block-editor").getSettings().colors.filter(
 		word => word['origin'] !== 'core'
-		);
+	);
 
-	const selectionStart = wp.data.select( "core/block-editor" ).getBlockSelectionStart();
+	const selectionStart = wp.data.select("core/block-editor").getBlockSelectionStart();
 
-	const selectionEnd = wp.data.select( "core/block-editor" ).getBlockSelectionEnd();
+	const selectionEnd = wp.data.select("core/block-editor").getBlockSelectionEnd();
 
 	const isOneSelected = selectionStart === selectionEnd;
 
-	const styleRegular = /is-style-regular/.test( blockProps.className ) || ! /is-style-grid/.test( blockProps.className ) && ! /is-style-no-bloat/.test( blockProps.className );
+	const styleRegular = /is-style-regular/.test(blockProps.className) || ! /is-style-grid/.test(blockProps.className) && ! /is-style-no-bloat/.test(blockProps.className);
 
 	return (
 		<>
-			{( styleRegular || /is-style-grid/.test( blockProps.className ) ) && (
+			{(styleRegular || /is-style-grid/.test(blockProps.className)) && (
 				<InspectorControls>
 					{isOneSelected && (
-						<PanelBody title={ __( 'Settings' ) }>
-							{( styleRegular ) && (
+						<PanelBody title={__('Settings')}>
+							{(styleRegular) && (
 								<RangeControl
 									label="Indent"
 									isShiftStepEnabled={true}
 									value={indent}
-									onChange={ ( newIndent ) => setAttributes( { indent: newIndent } ) }
+									onChange={(newIndent) => setAttributes({ indent: newIndent })}
 									initialPosition={10}
-									min={ 0 }
-									max={ 100 }
+									min={0}
+									max={100}
 								/>
 							)}
-							{/is-style-grid/.test( blockProps.className ) && (
+							{/is-style-grid/.test(blockProps.className) && (
 								<RangeControl
 									label="Spacing"
 									isShiftStepEnabled={true}
 									value={spacing}
-									onChange={ ( newSpacing ) => setAttributes( { spacing: newSpacing } ) }
+									onChange={(newSpacing) => setAttributes({ spacing: newSpacing })}
 									initialPosition={30}
-									min={ 1 }
-									max={ 100 }
+									min={1}
+									max={100}
 								/>
 							)}
 						</PanelBody>
 					)}
-					<PanelBody title={ __( 'Defines Term (dt)' ) }>
+					<PanelBody title={__('Defines Term (dt)')}>
 						<FontSizePicker
-							fontSizes={ fontSizes }
-							value={ termsFontSize }
-							onChange={ (newFontSize) => setAttributes( { termsFontSize: newFontSize } )}
+							fontSizes={fontSizes}
+							value={termsFontSize}
+							onChange={(newFontSize) => setAttributes({ termsFontSize: newFontSize })}
 						/>
 						<hr />
 						<h3>Text Color</h3>
 						<ColorPalette
-							colors={ colors }
-							value={ termsColor }
-							onChange={ ( newColor ) => setAttributes( {termsColor: newColor} ) }
+							colors={colors}
+							value={termsColor}
+							onChange={(newColor) => setAttributes({ termsColor: newColor })}
 							disableAlpha
 						/>
 						<hr />
 						<h3>Margin</h3>
 						<BoxControl
-							values={ termsMargin }
-							onChange={ (value) => {setAttributes({termsMargin: value})} }
-							resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
+							values={termsMargin}
+							onChange={(value) => { setAttributes({ termsMargin: value }) }}
+							resetValues={{ top: '0px', right: '0px', bottom: '0px', left: '0px' }}
 						/>
 						<hr />
 						<h3>Padding</h3>
 						<BoxControl
-							values={ termsPadding }
-							onChange={ (value) => {setAttributes({termsPadding: value})} }
-							resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
+							values={termsPadding}
+							onChange={(value) => { setAttributes({ termsPadding: value }) }}
+							resetValues={{ top: '0px', right: '0px', bottom: '0px', left: '0px' }}
 						/>
 					</PanelBody>
-					<PanelBody title={ __( 'Defines Description (dd)' ) }>
+					<PanelBody title={__('Defines Description (dd)')}>
 						<FontSizePicker
-							fontSizes={ fontSizes }
-							value={ descriptionsFontSize }
-							onChange={ ( newFontSize ) => {
-								setAttributes( { descriptionsFontSize: newFontSize } )
-							} }
-						/> 
+							fontSizes={fontSizes}
+							value={descriptionsFontSize}
+							onChange={(newFontSize) => {
+								setAttributes({ descriptionsFontSize: newFontSize })
+							}}
+						/>
 						<hr />
 						<h3>Text Color</h3>
 						<ColorPalette
-							colors={ colors }
-							value={ descriptionsColor }
-							onChange={ ( newColor ) => setAttributes( {descriptionsColor: newColor} ) }
+							colors={colors}
+							value={descriptionsColor}
+							onChange={(newColor) => setAttributes({ descriptionsColor: newColor })}
 						/>
 						<hr />
 						<h3>Margin</h3>
 						<BoxControl
-							values={ descriptionsMargin }
-							onChange={ ( value ) => setAttributes( {descriptionsMargin: value} ) }
-							resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
+							values={descriptionsMargin}
+							onChange={(value) => setAttributes({ descriptionsMargin: value })}
+							resetValues={{ top: '0px', right: '0px', bottom: '0px', left: '0px' }}
 						/>
 						<hr />
 						<h3>Padding</h3>
 						<BoxControl
-							values={ descriptionsPadding }
-							onChange={ ( value ) => setAttributes( {descriptionsPadding: value} ) }
-							resetValues={ {top: '0px',right: '0px',bottom: '0px',left: '0px'} }
+							values={descriptionsPadding}
+							onChange={(value) => setAttributes({ descriptionsPadding: value })}
+							resetValues={{ top: '0px', right: '0px', bottom: '0px', left: '0px' }}
 						/>
 					</PanelBody>
 				</InspectorControls>
 			)}
 			<dl {...blockProps}
-				className={classnames( blockProps.className, {
-					[ `has-${ termsFontSize }-term-font-size` ]: termsFontSize,
-					[ `has-${ descriptionsFontSize }-descriptions-font-size` ]: descriptionsFontSize,
-				} )}
-				style={{...(/is-style-grid/.test( blockProps.className )) && {gridTemplateColumns: `${spacing}% 2fr`}}}
+				className={classnames(blockProps.className, {
+					[`has-${termsFontSize}-term-font-size`]: termsFontSize,
+					[`has-${descriptionsFontSize}-descriptions-font-size`]: descriptionsFontSize,
+				})}
+				style={{ ...(/is-style-grid/.test(blockProps.className)) && { '--gridTemplateColumns': `${spacing}% 2fr` } }}
 			>
-				{ !isEmpty && (
+				{!isEmpty && (
 					<BlockControls>
 						<ToolbarGroup>
 							<ToolbarItem>
@@ -413,26 +413,38 @@ export default function Edit({ attributes, setAttributes }) {
 						/>
 					</>
 				)} */}
-				{ !isEmpty && (
+				{!isEmpty && (
 					attributes['list'].map(
 						({ content, tag }, rowIndex) => (
-							<RichText 
+							<RichText
 								tagName={tag}
 								key={rowIndex}
-								style={{...( styleRegular || /is-style-grid/.test( blockProps.className )) && {
-										fontSize:(tag === 'dt' ? termsFontSize : descriptionsFontSize),
-										color:(tag === 'dt' ? termsColor : descriptionsColor),
-										marginTop:(tag === 'dt' ? termsMargin?.top : descriptionsMargin?.top),
-										marginBottom:(tag === 'dt' ? termsMargin?.bottom : descriptionsMargin?.bottom),
-										marginLeft:(tag === 'dt' ? termsMargin?.left : descriptionsMargin?.left),
-										marginRight:(tag === 'dt' ? termsMargin?.right : descriptionsMargin?.right),
-										paddingTop:(tag === 'dt' ? termsPadding?.top : descriptionsPadding?.top),
-										paddingBottom:(tag === 'dt' ? termsPadding?.bottom : descriptionsPadding?.bottom),
-										paddingLeft:(tag === 'dt' ? termsPadding?.left : descriptionsPadding?.left),
-										paddingRight:(tag === 'dt' ? termsPadding?.right : descriptionsPadding?.right),
-										marginInlineStart:(tag === 'dd' && styleRegular && 0 <= indent ? `${indent}%` : undefined),
-									}}
-								}
+								style={{
+									...(tag === 'dt') ? {
+										'--termsFontSize': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsFontSize,
+										'--termsColor': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsColor,
+										'--termsMarginTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.top,
+										'--termsMarginBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.bottom,
+										'--termsMarginLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.left,
+										'--termsMarginRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.right,
+										'--termsPaddingTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.top,
+										'--termsPaddingBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.bottom,
+										'--termsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.left,
+										'--termsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.right,
+									} : {
+										'--descriptionsFontSize': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsFontSize,
+										'--descriptionsColor': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsColor,
+										'--descriptionsMarginTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsMargin?.top,
+										'--descriptionsMarginBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsMargin?.bottom,
+										'--descriptionsMarginLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsMargin?.left,
+										'--descriptionsMarginRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsMargin?.right,
+										'--descriptionsMarginInlineStart': (styleRegular || /is-style-grid/.test(blockProps.className)) && (0 <= indent ? `${indent}%` : undefined),
+										'--descriptionsPaddingTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.top,
+										'--descriptionsPaddingBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.bottom,
+										'--descriptionsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.left,
+										'--descriptionsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.right,
+									}
+								}}
 								value={content}
 								onChange={onChange}
 								onFocus={() => {
@@ -446,11 +458,11 @@ export default function Edit({ attributes, setAttributes }) {
 								// onKeyDownCapture={onKeyUp}
 								placeholder={placeholder[tag]}
 							/>
-							
+
 						)
 					)
 				)}
-				{ isEmpty && (
+				{isEmpty && (
 					<Placeholder
 						label={__('Description List')}
 						icon={<BlockIcon icon="clipboard" showColors />}

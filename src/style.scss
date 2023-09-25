@@ -5,55 +5,75 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-description-list-block-description-list {
-    // "Float" style variation.
-    &.is-style-regular,
-    &.is-style-indent-start,
-    &.is-style-indent-start-40 {
-        dt,
-        dd {
-            padding: 0;
-            margin: 0;
-        }
+$termsFontSize: var(--termsFontSize, none);
+$descriptionsFontSize: var(--descriptionsFontSize, none);
+$termsColor: var(--termsColor, none);
+$descriptionsColor: var(--descriptionsColor, none);
+$termsMarginTop: var(--termsMarginTop, none);
+$descriptionsMarginTop: var(--descriptionsMarginTop, none);
+$termsMarginBottom: var(--termsMarginBottom, none);
+$descriptionsMarginBottom: var(--descriptionsMarginBottom, none);
+$termsMarginLeft: var(--termsMarginLeft, none);
+$descriptionsMarginLeft: var(--descriptionsMarginLeft, none);
+$termsMarginRight: var(--termsMarginRight, none);
+$descriptionsMarginRight: var(--descriptionsMarginRight, none);
+$descriptionsMarginInlineStart: var(--descriptionsMarginInlineStart, none);
+$termsPaddingTop: var(--termsPaddingTop, none);
+$descriptionsPaddingTop: var(--descriptionsPaddingTop, none);
+$termsPaddingBottom: var(--termsPaddingBottom, none);
+$descriptionsPaddingBottom: var(--descriptionsPaddingBottom, none);
+$termsPaddingLeft: var(--termsPaddingLeft, none);
+$descriptionsPaddingLeft: var(--descriptionsPaddingLeft, none);
+$termsPaddingRight: var(--termsPaddingRight, none);
+$descriptionsPaddingRight: var(--descriptionsPaddingRight, none);
+$gridTemplateColumns: var(--gridTemplateColumns, none);
+
+dl.wp-block-description-list-block-description-list {
+
+    grid-template-columns: $gridTemplateColumns;
+
+    dt {
+        font-size: $termsFontSize;
+        color: $termsColor;
+        margin-top: $termsMarginTop;
+        margin-bottom: $termsMarginBottom;
+        margin-left: $termsMarginLeft;
+        margin-right: $termsMarginRight;
+        padding-top: $termsPaddingTop;
+        padding-bottom: $termsPaddingBottom;
+        padding-left: $termsPaddingLeft;
+        padding-right: $termsPaddingRight;
+    }
+
+    dd {
+        font-size: $descriptionsFontSize;
+        color: $descriptionsColor;
+        margin-top: $descriptionsMarginTop;
+        margin-bottom: $descriptionsMarginBottom;
+        margin-left: $descriptionsMarginLeft;
+        margin-right: $descriptionsMarginRight;
+        margin-inline-start: $descriptionsMarginInlineStart;
+        padding-top: $descriptionsPaddingTop;
+        padding-bottom: $descriptionsPaddingBottom;
+        padding-left: $descriptionsPaddingLeft;
+        padding-right: $descriptionsPaddingRight;
+    }
+
+    &.is-style-regular {
         dt {
             float: unset;
         }
     }
-    &.is-style-indent-start {
-        dd {
-            margin-inline-start: unset;
-        }
-    }
-    &.is-style-indent-start-40 {
-        dd {
-            margin-inline-start: 40px;
-        }
-    }
-    // Float style variation.
-    &.is-style-grid,
-    &.is-style-grid-1-2,
-    &.is-style-grid-1-4 {
+
+    &.is-style-grid {
         @media only screen and (min-width: 480px) {
-            dt, dd {
-                padding: 0;
-                margin: 0;
-            }
             display: grid;
         }
     }
+
     &.is-style-grid {
         @media only screen and (min-width: 320px) {
-            grid-template-columns: auto auto;
-        }
-    }
-    &.is-style-grid-1-2 {
-        @media only screen and (min-width: 320px) {
-            grid-template-columns: 1fr 2fr;
-        }
-    }
-    &.is-style-grid-1-4 {
-        @media only screen and (min-width: 320px) {
-            grid-template-columns: 1fr 4fr;
+            grid-template-columns: $gridTemplateColumns;
         }
     }
 }
