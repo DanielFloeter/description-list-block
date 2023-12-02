@@ -4,7 +4,11 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-
+ $termsFontStyle: var(--termsFontStyle, none);
+ $termsFontWeight: var(--termsFontWeight, none);
+ $descriptionsFontStyle: var(--descriptionsFontStyle, none);
+ $descriptionsFontWeight: var(--descriptionsFontWeight, none);
+ 
  $termsFontSize: var(--termsFontSize, none);
  $descriptionsFontSize: var(--descriptionsFontSize, none);
  $termsColor: var(--termsColor, none);
@@ -33,6 +37,8 @@
 	 grid-template-columns: $gridTemplateColumns;
  
 	 dt div {
+		font-style: $termsFontStyle;
+        font-weight: $termsFontWeight;
 		 font-size: $termsFontSize;
 		 color: $termsColor;
 		 margin-top: $termsMarginTop;
@@ -46,6 +52,8 @@
 	 }
  
 	 dd div {
+		font-style: $descriptionsFontStyle;
+        font-weight: $descriptionsFontWeight;
 		 font-size: $descriptionsFontSize;
 		 color: $descriptionsColor;
 		 margin-top: $descriptionsMarginTop;

@@ -6,6 +6,10 @@ import classnames from 'classnames';
 
 export default function save({ attributes }) {
 	const {
+		termsFontStyle,
+        termsFontWeight,
+        descriptionsFontStyle,
+        descriptionsFontWeight,
 		list,
 		termsFontSize,
 		descriptionsFontSize,
@@ -39,6 +43,8 @@ export default function save({ attributes }) {
 						<RichText.Content
 							style={{
 								...(tag === 'dt') ? {
+									'--termsFontStyle': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsFontStyle,
+									'--termsFontWeight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsFontWeight,
 									'--termsFontSize': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsFontSize,
 									'--termsColor': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsColor,
 									'--termsMarginTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.top,
@@ -50,6 +56,8 @@ export default function save({ attributes }) {
 									'--termsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.left,
 									'--termsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.right,
 								} : {
+									'--descriptionsFontStyle': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsFontStyle,
+									'--descriptionsFontWeight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsFontWeight,
 									'--descriptionsFontSize': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsFontSize,
 									'--descriptionsColor': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsColor,
 									'--descriptionsMarginTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsMargin?.top,

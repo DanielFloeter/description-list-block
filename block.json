@@ -13,6 +13,10 @@
         "__unstablePasteTextInline": true
     },
     "attributes": {
+        "termsFontStyle": {},
+        "termsFontWeight": {},
+        "descriptionsFontStyle": {},
+        "descriptionsFontWeight": {},
         "termsFontSize": {},
         "descriptionsFontSize": {},
         "termsColor": {},

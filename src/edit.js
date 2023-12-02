@@ -14,7 +14,7 @@ import {
 	ColorPalette,
 	__experimentalBoxControl,
 	BoxControl as stableBoxControl,
-	RangeControl
+	RangeControl,
 } from '@wordpress/components';
 import {
 	tableRowAfter,
@@ -37,11 +37,16 @@ import {
 } from './state';
 import classnames from 'classnames';
 import { ENTER, SHIFT, UP } from '@wordpress/keycodes';
+import FontAppearanceControl from './FontAppearanceControl';
 
 export const BoxControl = __experimentalBoxControl || stableBoxControl;
 
 export default function Edit({ attributes, setAttributes }) {
 	const {
+		termsFontStyle,
+        termsFontWeight,
+        descriptionsFontStyle,
+        descriptionsFontWeight,
 		termsFontSize,
 		descriptionsFontSize,
 		termsColor,
@@ -266,6 +271,26 @@ export default function Edit({ attributes, setAttributes }) {
 		word => word['origin'] !== 'core'
 	);
 
+	const setTermsFontAppearance = ( {
+		fontStyle: newFontStyle,
+		fontWeight: newFontWeight,
+	} ) => {
+		setAttributes( {
+			termsFontStyle: newFontStyle || undefined,
+			termsFontWeight: newFontWeight || undefined,
+		} );
+	};
+
+	const setDescriptionsFontAppearance = ( {
+		fontStyle: newFontStyle,
+		fontWeight: newFontWeight,
+	} ) => {
+		setAttributes( {
+			descriptionsFontStyle: newFontStyle || undefined,
+			descriptionsFontWeight: newFontWeight || undefined,
+		} );
+	};
+
 	const selectionStart = wp.data.select("core/block-editor").getBlockSelectionStart();
 
 	const selectionEnd = wp.data.select("core/block-editor").getBlockSelectionEnd();
@@ -320,6 +345,12 @@ export default function Edit({ attributes, setAttributes }) {
 							value={termsFontSize}
 							onChange={(newFontSize) => setAttributes({ termsFontSize: newFontSize })}
 						/>
+						<FontAppearanceControl
+							value={ { fontStyle: termsFontStyle, fontWeight: termsFontWeight } }
+							onChange={ setTermsFontAppearance }
+							hasFontStyles={ true }
+							hasFontWeights={ true }
+						/>
 						<hr />
 						<h3>Text Color</h3>
 						<ColorPalette
@@ -350,6 +381,12 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={(newFontSize) => {
 								setAttributes({ descriptionsFontSize: newFontSize })
 							}}
+						/>
+						<FontAppearanceControl
+							value={ { fontStyle: descriptionsFontStyle, fontWeight: descriptionsFontWeight } }
+							onChange={ setDescriptionsFontAppearance }
+							hasFontStyles={ true }
+							hasFontWeights={ true }
 						/>
 						<hr />
 						<h3>Text Color</h3>
@@ -431,6 +468,8 @@ export default function Edit({ attributes, setAttributes }) {
 								key={rowIndex}
 								style={{
 									...(tag === 'dt') ? {
+										'--termsFontStyle': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsFontStyle,
+										'--termsFontWeight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsFontWeight,
 										'--termsFontSize': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsFontSize,
 										'--termsColor': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsColor,
 										'--termsMarginTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.top,
@@ -442,6 +481,8 @@ export default function Edit({ attributes, setAttributes }) {
 										'--termsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.left,
 										'--termsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.right,
 									} : {
+										'--descriptionsFontStyle': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsFontStyle,
+										'--descriptionsFontWeight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsFontWeight,
 										'--descriptionsFontSize': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsFontSize,
 										'--descriptionsColor': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsColor,
 										'--descriptionsMarginTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsMargin?.top,

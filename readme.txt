@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              block, description list, gutenberg, list
 Requires at least: 5.6
 Tested up to:      6.4
-Stable tag:        1.2.2
+Stable tag:        1.2.3
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -21,7 +21,7 @@ We're [Tip Top Press](http://tiptoppress.com/) and create Gutenberg Blocks for W
 = Features =
 * Indent-, Grid and Disable Block CSS Block Styles
 * Indent or spacing settings
-* Color, margin, padding and font-size settings for both element tags
+* Color, spacing, indent, horizontal whitspce, font-size, font-style and font-weight settings for both element tags
 * Create a description list with n-elements
 * Insert a new term (`<dt>`) and description (`<dd>`) before selection
 * Insert a new term (`<dt>`) and description (`<dd>`) after selection
@@ -57,6 +57,10 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 6. Seperate Term (dt) and Description (dd) settings
 
 == Changelog ==
+
+= 1.2.3 - December 02th 2023 =
+* Font-Style and Font-Weight 
+* Calm whitespace with Horizontal
 
 = 1.2.2 - September 26th 2023 =
 * Use CSS selectors
