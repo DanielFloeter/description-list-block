@@ -1,8 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __, _x } from '@wordpress/i18n';
 
-import './style.scss';
-
 import deprecated from './deprecated';
 import Edit from './edit';
 import save from './save';

@@ -1,4 +1,5 @@
 
+import './editor.scss';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
@@ -27,8 +28,6 @@ import {
 	BlockIcon,
 	useBlockProps,
 } from '@wordpress/block-editor';
-
-import './editor.scss';
 import {
 	createDescriptionList,
 	updateSelectedCell,
