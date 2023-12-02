@@ -17,6 +17,7 @@ export default function save({ attributes }) {
 		descriptionsPadding,
 		indent,
 		spacing,
+		horizontal,
 	} = attributes;
 	const className = classnames({
 		[`has-${termsFontSize}-term-font-size`]: termsFontSize,
@@ -45,7 +46,7 @@ export default function save({ attributes }) {
 									'--termsMarginLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.left,
 									'--termsMarginRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.right,
 									'--termsPaddingTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.top,
-									'--termsPaddingBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.bottom,
+									'--termsPaddingBottom': (/is-style-grid/.test(blockProps.className)) && `${horizontal}px`,
 									'--termsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.left,
 									'--termsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.right,
 								} : {
@@ -57,7 +58,7 @@ export default function save({ attributes }) {
 									'--descriptionsMarginRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsMargin?.right,
 									'--descriptionsMarginInlineStart': (styleRegular || /is-style-grid/.test(blockProps.className)) && (0 <= indent ? `${indent}%` : undefined),
 									'--descriptionsPaddingTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.top,
-									'--descriptionsPaddingBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.bottom,
+									'--descriptionsPaddingBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && `${horizontal}px`,
 									'--descriptionsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.left,
 									'--descriptionsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.right,
 								}

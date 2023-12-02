@@ -52,6 +52,7 @@ export default function Edit({ attributes, setAttributes }) {
 		descriptionsPadding,
 		indent,
 		spacing,
+		horizontal,
 	} = attributes;
 	const blockProps = useBlockProps();
 	const [initialRowCount, setInitialRowCount] = useState(2);
@@ -301,6 +302,16 @@ export default function Edit({ attributes, setAttributes }) {
 									max={100}
 								/>
 							)}
+							<RangeControl
+								allowReset={true}
+								label="Horizontal"
+								isShiftStepEnabled={true}
+								value={horizontal}
+								onChange={ ( newHorizontal ) => setAttributes( { horizontal: newHorizontal } ) }
+								initialPosition={0}
+								min={ 0 }
+								max={ 100 }
+							/>
 						</PanelBody>
 					)}
 					<PanelBody title={__('Defines Term (dt)')}>
@@ -317,7 +328,7 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={(newColor) => setAttributes({ termsColor: newColor })}
 							disableAlpha
 						/>
-						<hr />
+						{/* <hr />
 						<h3>Margin</h3>
 						<BoxControl
 							values={termsMargin}
@@ -330,7 +341,7 @@ export default function Edit({ attributes, setAttributes }) {
 							values={termsPadding}
 							onChange={(value) => { setAttributes({ termsPadding: value }) }}
 							resetValues={{ top: '0px', right: '0px', bottom: '0px', left: '0px' }}
-						/>
+						/> */}
 					</PanelBody>
 					<PanelBody title={__('Defines Description (dd)')}>
 						<FontSizePicker
@@ -347,7 +358,7 @@ export default function Edit({ attributes, setAttributes }) {
 							value={descriptionsColor}
 							onChange={(newColor) => setAttributes({ descriptionsColor: newColor })}
 						/>
-						<hr />
+						{/* <hr />
 						<h3>Margin</h3>
 						<BoxControl
 							values={descriptionsMargin}
@@ -360,7 +371,7 @@ export default function Edit({ attributes, setAttributes }) {
 							values={descriptionsPadding}
 							onChange={(value) => setAttributes({ descriptionsPadding: value })}
 							resetValues={{ top: '0px', right: '0px', bottom: '0px', left: '0px' }}
-						/>
+						/> */}
 					</PanelBody>
 				</InspectorControls>
 			)}
@@ -427,7 +438,7 @@ export default function Edit({ attributes, setAttributes }) {
 										'--termsMarginLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.left,
 										'--termsMarginRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.right,
 										'--termsPaddingTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.top,
-										'--termsPaddingBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.bottom,
+										'--termsPaddingBottom': (/is-style-grid/.test(blockProps.className)) && `${horizontal}px`,
 										'--termsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.left,
 										'--termsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.right,
 									} : {
@@ -439,7 +450,7 @@ export default function Edit({ attributes, setAttributes }) {
 										'--descriptionsMarginRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsMargin?.right,
 										'--descriptionsMarginInlineStart': (styleRegular || /is-style-grid/.test(blockProps.className)) && (0 <= indent ? `${indent}%` : undefined),
 										'--descriptionsPaddingTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.top,
-										'--descriptionsPaddingBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.bottom,
+										'--descriptionsPaddingBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && `${horizontal}px`,
 										'--descriptionsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.left,
 										'--descriptionsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.right,
 									}

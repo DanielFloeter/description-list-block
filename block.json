@@ -61,6 +61,10 @@
             "type": "integer",
             "default": 30
         },
+        "horizontal": {
+            "type": "integer",
+            "default": 0
+        },
         "list": {
             "type": "array",
             "default": [],
