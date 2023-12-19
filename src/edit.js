@@ -4,6 +4,7 @@ import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
 	PanelBody,
+	PanelRow,
 	Button,
 	DropdownMenu,
 	Placeholder,
@@ -339,7 +340,7 @@ export default function Edit({ attributes, setAttributes }) {
 							/>
 						</PanelBody>
 					)}
-					<PanelBody title={__('Defines Term (dt)')}>
+					<PanelBody title={__('Term')}>
 						<FontSizePicker
 							fontSizes={fontSizes}
 							value={termsFontSize}
@@ -351,8 +352,7 @@ export default function Edit({ attributes, setAttributes }) {
 							hasFontStyles={ true }
 							hasFontWeights={ true }
 						/>
-						<hr />
-						<h3>Text Color</h3>
+						<PanelRow>Color</PanelRow>
 						<ColorPalette
 							colors={colors}
 							value={termsColor}
@@ -374,7 +374,7 @@ export default function Edit({ attributes, setAttributes }) {
 							resetValues={{ top: '0px', right: '0px', bottom: '0px', left: '0px' }}
 						/> */}
 					</PanelBody>
-					<PanelBody title={__('Defines Description (dd)')}>
+					<PanelBody title={__('Description')}>
 						<FontSizePicker
 							fontSizes={fontSizes}
 							value={descriptionsFontSize}
@@ -388,8 +388,7 @@ export default function Edit({ attributes, setAttributes }) {
 							hasFontStyles={ true }
 							hasFontWeights={ true }
 						/>
-						<hr />
-						<h3>Text Color</h3>
+						<PanelRow>Color</PanelRow>
 						<ColorPalette
 							colors={colors}
 							value={descriptionsColor}
