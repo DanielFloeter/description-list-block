@@ -1,9 +1,9 @@
 === Description List Block ===
 Contributors:      kometschuh
 Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
-Tags:              block, description list, gutenberg, list
+Tags:              block, description list, definition list, gutenberg, list
 Requires at least: 5.6
-Tested up to:      6.4
+Tested up to:      6.5
 Stable tag:        1.2.3
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
