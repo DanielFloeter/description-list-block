@@ -36,9 +36,9 @@ import {
 	deleteListPair,
 	isEmptyDescriptionList,
 } from './state';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { ENTER, SHIFT, UP } from '@wordpress/keycodes';
-import FontAppearanceControl from './FontAppearanceControl';
+import FontAppearanceControl from './font-appearance-control';
 
 export const BoxControl = __experimentalBoxControl || stableBoxControl;
 
@@ -412,7 +412,7 @@ export default function Edit({ attributes, setAttributes }) {
 				</InspectorControls>
 			)}
 			<dl {...blockProps}
-				className={classnames(blockProps.className, {
+				className={clsx(blockProps.className, {
 					[`has-${termsFontSize}-term-font-size`]: termsFontSize,
 					[`has-${descriptionsFontSize}-descriptions-font-size`]: descriptionsFontSize,
 				})}

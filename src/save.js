@@ -2,7 +2,7 @@
 import './style.scss';
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import classnames from 'classnames';
+import clsx from 'clsx';
 
 export default function save({ attributes }) {
 	const {
@@ -23,7 +23,7 @@ export default function save({ attributes }) {
 		spacing,
 		horizontal,
 	} = attributes;
-	const className = classnames({
+	const className = clsx({
 		[`has-${termsFontSize}-term-font-size`]: termsFontSize,
 		[`has-${descriptionsFontSize}-descriptions-font-size`]: descriptionsFontSize,
 	});
