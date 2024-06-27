@@ -3,9 +3,9 @@ import { __, _x } from '@wordpress/i18n';
 
 import deprecated from './deprecated';
 import Edit from './edit';
-import save from './save';
+import Save from './save';
 
-import metadata from './../block.json';
+import metadata from './block.json';
 const { name } = metadata;
 
 registerBlockType(name, {
@@ -70,6 +70,6 @@ registerBlockType(name, {
 
     ],
     edit: Edit,
-    save,
+    save: Save,
     deprecated,
 });

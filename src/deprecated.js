@@ -3,7 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import clsx from 'clsx';
 
-import metadata from './../block.json';
+import metadata from './block.json';
 
 const v1 = {
     ...metadata,

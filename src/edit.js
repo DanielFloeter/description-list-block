@@ -1,7 +1,6 @@
-
+import { __ } from '@wordpress/i18n';
 import './editor.scss';
 import { useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 import {
 	PanelBody,
 	PanelRow,
@@ -41,6 +40,7 @@ import { ENTER, SHIFT, UP } from '@wordpress/keycodes';
 import FontAppearanceControl from './font-appearance-control';
 
 export const BoxControl = __experimentalBoxControl || stableBoxControl;
+
 
 export default function Edit({ attributes, setAttributes }) {
 	const {
@@ -155,7 +155,7 @@ export default function Edit({ attributes, setAttributes }) {
 	 *
 	 * @param {Array} content A RichText content value.
 	 */
-	function onChange(content) {
+	function onChange(content) { 
 		if (!selectedCell) {
 			return;
 		}
@@ -504,11 +504,9 @@ export default function Edit({ attributes, setAttributes }) {
 										type: 'cell'
 									});
 								}}
-								multiline='false'
 								// onKeyDownCapture={onKeyUp}
 								placeholder={placeholder[tag]}
 							/>
-
 						)
 					)
 				)}
@@ -544,3 +542,4 @@ export default function Edit({ attributes, setAttributes }) {
 		</>
 	);
 }
+

@@ -41,6 +41,8 @@ export default function save({ attributes }) {
 				({ content, tag }, rowIndex) => {
 					return (
 						<RichText.Content
+							tagName={tag}
+							key={rowIndex}
 							style={{
 								...(tag === 'dt') ? {
 									'--termsFontStyle': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsFontStyle,
@@ -71,9 +73,7 @@ export default function save({ attributes }) {
 									'--descriptionsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.right,
 								}
 							}}
-							tagName={tag}
 							value={content}
-							key={rowIndex}
 						/>
 					);
 				}
