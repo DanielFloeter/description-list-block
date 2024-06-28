@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              block, description list, definition list, gutenberg, list
 Requires at least: 5.6
 Tested up to:      6.5
-Stable tag:        1.2.4
+Stable tag:        1.2.5
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -57,6 +57,9 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 6. Seperate Term (dt) and Description (dd) settings
 
 == Changelog ==
+
+= 1.2.5 - Juni 29th 2024 =
+* Wrong icon
 
 = 1.2.4 - Juni 27th 2024 =
 * Bugfix Rendered HTML

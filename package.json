@@ -1,6 +1,6 @@
 {
     "name": "description-list-block",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "description": "Displays a description list using the dl element consist of a series of term and description pairs (dt, dd).",
     "author": "kometschuh",
     "license": "GPL-2.0-or-later",
@@ -14,13 +14,9 @@
         "packages-update": "wp-scripts packages-update"
     },
     "dependencies": {
-        "@wordpress/block-editor": "^12.15.0",
-        "@wordpress/blocks": "^12.24.0",
-        "@wordpress/data": "^9.17.0",
-        "@wordpress/i18n": "^4.47.0",
+        "@wordpress/icons": "^9.49.0",
         "lodash": "^4.17.21",
-        "npm": "^10.2.4",
-        "semver": "^7.5.4"
+        "clsx": "^2.1.1"
     },
     "devDependencies": {
         "@wordpress/scripts": "^26.18.0"

@@ -1,9 +1,12 @@
 {
-    "apiVersion": 2,
-    "name": "description-list-block/description-list",
-    "title": "Description List Block",
-    "category": "text",
-    "icon": "clipboard",
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "description-list-block/description-list",
+	"version": "1.2.5",
+	"title": "Description List Block",
+	"category": "text",
+	"icon": "clipboard",
+	"description": "Example block scaffolded with Create Block tool.",
     "supports": {
         "html": true,
         "anchor": true,
@@ -12,17 +15,17 @@
         },
         "__unstablePasteTextInline": true
     },
-    "attributes": {
-        "termsFontStyle": {},
-        "termsFontWeight": {},
-        "descriptionsFontStyle": {},
-        "descriptionsFontWeight": {},
-        "termsFontSize": {},
-        "descriptionsFontSize": {},
-        "termsColor": {},
-        "descriptionsColor": {},
+	"attributes": {
+        "termsFontStyle": {"type": "string"},
+        "termsFontWeight": {"type": "string"},
+        "descriptionsFontStyle": {"type": "string"},
+        "descriptionsFontWeight": {"type": "string"},
+        "termsFontSize": {"type": "string"},
+        "descriptionsFontSize": {"type": "string"},
+        "termsColor": {"type": "string"},
+        "descriptionsColor": {"type": "string"},
         "termsMargin": {
-            "type": "Object",
+            "type": "object",
             "default": {
                 "top":"0px",
                 "right":"0px",
@@ -31,7 +34,7 @@
             }
         },
         "descriptionsMargin": {
-            "type": "Object",
+            "type": "object",
             "default": {
                 "top":"0px",
                 "right":"0px",
@@ -40,7 +43,7 @@
             }
         },
         "termsPadding": {
-            "type": "Object",
+            "type": "object",
             "default": {
                 "top":"0px",
                 "right":"0px",
@@ -49,7 +52,7 @@
             }
         },
         "descriptionsPadding": {
-            "type": "Object",
+            "type": "object",
             "default": {
                 "top":"0px",
                 "right":"0px",
@@ -76,8 +79,8 @@
             "selector": "dt,dd",
             "query": {
                 "content": {
-                    "type": "string",
-                    "source": "html"
+                    "type": "rich-text",
+                    "source": "rich-text"
                 },
                 "tag": {
                     "type": "string",
@@ -87,8 +90,10 @@
             }
         }
     },
-    "textdomain": "description-list-block",
-    "editorScript": "file:./build/index.js",
-    "editorStyle": "file:./build/index.css",
-    "style": "file:./build/style-index.css"
+	"textdomain": "description-list-block",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./style-index.css",
+	"style": "file:./style-index.css",
+
+	"viewScript": "file:./view.js"
 }
