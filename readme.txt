@@ -26,8 +26,8 @@ We're [Tip Top Press](http://tiptoppress.com/) and create Gutenberg Blocks for W
 * Insert a new term (`<dt>`) and description (`<dd>`) before selection
 * Insert a new term (`<dt>`) and description (`<dd>`) after selection
 * Delete the selcted term (`<dt>`) and description (`<dd>`) pair
-* Access via Shortcuts
 * Transform an Individual HTML block, a list or paragraphs into a description list and back
+* Paste description list markup as a description list
 
 = Contribute =
 While using this plugin if you find any bug or any conflict, please submit an issue at [Github](https://github.com/DanielFloeter/description-list-block) (If possible with a pull request).
