@@ -6,6 +6,11 @@
  */
 
 
+/**
+ * Font and color have no attribute default. The fallback `none` keeps the
+ * declaration invalid as long as the block does not set the property, so
+ * the theme styling stays untouched.
+ */
 $termsFontStyle: var(--termsFontStyle, none);
 $termsFontWeight: var(--termsFontWeight, none);
 $descriptionsFontStyle: var(--descriptionsFontStyle, none);
@@ -15,58 +20,76 @@ $termsFontSize: var(--termsFontSize, none);
 $descriptionsFontSize: var(--descriptionsFontSize, none);
 $termsColor: var(--termsColor, none);
 $descriptionsColor: var(--descriptionsColor, none);
-$termsMarginTop: var(--termsMarginTop, none);
-$descriptionsMarginTop: var(--descriptionsMarginTop, none);
-$termsMarginBottom: var(--termsMarginBottom, none);
-$descriptionsMarginBottom: var(--descriptionsMarginBottom, none);
-$termsMarginLeft: var(--termsMarginLeft, none);
-$descriptionsMarginLeft: var(--descriptionsMarginLeft, none);
-$termsMarginRight: var(--termsMarginRight, none);
-$descriptionsMarginRight: var(--descriptionsMarginRight, none);
-$descriptionsMarginInlineStart: var(--descriptionsMarginInlineStart, none);
-$termsPaddingTop: var(--termsPaddingTop, none);
-$descriptionsPaddingTop: var(--descriptionsPaddingTop, none);
-$termsPaddingBottom: var(--termsPaddingBottom, none);
-$descriptionsPaddingBottom: var(--descriptionsPaddingBottom, none);
-$termsPaddingLeft: var(--termsPaddingLeft, none);
-$descriptionsPaddingLeft: var(--descriptionsPaddingLeft, none);
-$termsPaddingRight: var(--termsPaddingRight, none);
-$descriptionsPaddingRight: var(--descriptionsPaddingRight, none);
-$gridTemplateColumns: var(--gridTemplateColumns, none);
+
+/**
+ * The fallbacks below carry the attribute defaults from block.json. The saved
+ * markup only has to contain the values that differ from them.
+ */
+$termsMarginTop: var(--termsMarginTop, 0px);
+$descriptionsMarginTop: var(--descriptionsMarginTop, 0px);
+$termsMarginBottom: var(--termsMarginBottom, 0px);
+$descriptionsMarginBottom: var(--descriptionsMarginBottom, 0px);
+$termsMarginLeft: var(--termsMarginLeft, 0px);
+$descriptionsMarginLeft: var(--descriptionsMarginLeft, 0px);
+$termsMarginRight: var(--termsMarginRight, 0px);
+$descriptionsMarginRight: var(--descriptionsMarginRight, 0px);
+$descriptionsMarginInlineStart: var(--descriptionsMarginInlineStart, 10%);
+$termsPaddingTop: var(--termsPaddingTop, 0px);
+$descriptionsPaddingTop: var(--descriptionsPaddingTop, 0px);
+$termsPaddingBottom: var(--termsPaddingBottom, 0px);
+$descriptionsPaddingBottom: var(--descriptionsPaddingBottom, 0px);
+$termsPaddingLeft: var(--termsPaddingLeft, 0px);
+$descriptionsPaddingLeft: var(--descriptionsPaddingLeft, 0px);
+$termsPaddingRight: var(--termsPaddingRight, 0px);
+$descriptionsPaddingRight: var(--descriptionsPaddingRight, 0px);
+$gridTemplateColumns: var(--gridTemplateColumns, 30% 2fr);
 
 dl.wp-block-description-list-block-description-list {
 
-    grid-template-columns: $gridTemplateColumns;
+    /**
+     * `:where()` excludes the Disable Block CSS style without adding
+     * specificity, so the rules keep the weight they had before.
+     */
+    &:where(:not(.is-style-no-bloat)) {
 
-    dt {
-        font-style: $termsFontStyle;
-        font-weight: $termsFontWeight;
-        font-size: $termsFontSize;
-        color: $termsColor;
-        margin-top: $termsMarginTop;
-        margin-bottom: $termsMarginBottom;
-        margin-left: $termsMarginLeft;
-        margin-right: $termsMarginRight;
-        padding-top: $termsPaddingTop;
-        padding-bottom: $termsPaddingBottom;
-        padding-left: $termsPaddingLeft;
-        padding-right: $termsPaddingRight;
+        dt {
+            font-style: $termsFontStyle;
+            font-weight: $termsFontWeight;
+            font-size: $termsFontSize;
+            color: $termsColor;
+            margin-top: $termsMarginTop;
+            margin-bottom: $termsMarginBottom;
+            margin-left: $termsMarginLeft;
+            margin-right: $termsMarginRight;
+            padding-top: $termsPaddingTop;
+            padding-left: $termsPaddingLeft;
+            padding-right: $termsPaddingRight;
+        }
+
+        dd {
+            font-style: $descriptionsFontStyle;
+            font-weight: $descriptionsFontWeight;
+            font-size: $descriptionsFontSize;
+            color: $descriptionsColor;
+            margin-top: $descriptionsMarginTop;
+            margin-bottom: $descriptionsMarginBottom;
+            margin-left: $descriptionsMarginLeft;
+            margin-right: $descriptionsMarginRight;
+            margin-inline-start: $descriptionsMarginInlineStart;
+            padding-top: $descriptionsPaddingTop;
+            padding-bottom: $descriptionsPaddingBottom;
+            padding-left: $descriptionsPaddingLeft;
+            padding-right: $descriptionsPaddingRight;
+        }
     }
 
-    dd {
-        font-style: $descriptionsFontStyle;
-        font-weight: $descriptionsFontWeight;
-        font-size: $descriptionsFontSize;
-        color: $descriptionsColor;
-        margin-top: $descriptionsMarginTop;
-        margin-bottom: $descriptionsMarginBottom;
-        margin-left: $descriptionsMarginLeft;
-        margin-right: $descriptionsMarginRight;
-        margin-inline-start: $descriptionsMarginInlineStart;
-        padding-top: $descriptionsPaddingTop;
-        padding-bottom: $descriptionsPaddingBottom;
-        padding-left: $descriptionsPaddingLeft;
-        padding-right: $descriptionsPaddingRight;
+    /**
+     * Horizontal whitespace on the term is a grid only setting.
+     */
+    &:where(.is-style-grid) {
+        dt {
+            padding-bottom: $termsPaddingBottom;
+        }
     }
 
     &.is-style-regular {

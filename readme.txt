@@ -65,6 +65,7 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 * Transform paragraphs into a description list and back
 * Paste description list markup as a description list
 * Bugfix Invalid CSS variables in the saved markup
+* Write only non-default values to the block markup
 
 = 1.2.5 - Juni 29th 2024 =
 * Wrong icon

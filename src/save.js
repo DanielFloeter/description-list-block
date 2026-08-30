@@ -4,6 +4,22 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import clsx from 'clsx';
 
+import metadata from './block.json';
+
+/**
+ * Attribute defaults. They are mirrored by the fallbacks of the CSS custom
+ * properties in style.scss.
+ */
+const DEFAULTS = {
+	termsMargin: metadata.attributes.termsMargin.default,
+	descriptionsMargin: metadata.attributes.descriptionsMargin.default,
+	termsPadding: metadata.attributes.termsPadding.default,
+	descriptionsPadding: metadata.attributes.descriptionsPadding.default,
+	indent: metadata.attributes.indent.default,
+	spacing: metadata.attributes.spacing.default,
+	horizontal: metadata.attributes.horizontal.default,
+};
+
 /**
  * Removes empty values from a style object.
  *
@@ -25,6 +41,18 @@ const cssVars = (vars) =>
 				value !== ''
 		)
 	);
+
+/**
+ * Drops a value that equals the attribute default. The default is carried by
+ * the fallback of the CSS custom property, so it does not have to be repeated
+ * in the saved markup.
+ *
+ * @param {*} value        Current value.
+ * @param {*} defaultValue Attribute default.
+ * @return {*} The value, or `undefined` when it is the default.
+ */
+const unlessDefault = (value, defaultValue) =>
+	value === defaultValue ? undefined : value;
 
 export default function save({ attributes }) {
 	const {
@@ -71,28 +99,28 @@ export default function save({ attributes }) {
 									'--termsFontWeight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsFontWeight,
 									'--termsFontSize': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsFontSize,
 									'--termsColor': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsColor,
-									'--termsMarginTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.top,
-									'--termsMarginBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.bottom,
-									'--termsMarginLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.left,
-									'--termsMarginRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsMargin?.right,
-									'--termsPaddingTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.top,
-									'--termsPaddingBottom': (/is-style-grid/.test(blockProps.className)) && `${horizontal}px`,
-									'--termsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.left,
-									'--termsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsPadding?.right,
+									'--termsMarginTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(termsMargin?.top, DEFAULTS.termsMargin.top),
+									'--termsMarginBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(termsMargin?.bottom, DEFAULTS.termsMargin.bottom),
+									'--termsMarginLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(termsMargin?.left, DEFAULTS.termsMargin.left),
+									'--termsMarginRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(termsMargin?.right, DEFAULTS.termsMargin.right),
+									'--termsPaddingTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(termsPadding?.top, DEFAULTS.termsPadding.top),
+									'--termsPaddingBottom': (/is-style-grid/.test(blockProps.className)) && unlessDefault(`${horizontal}px`, `${DEFAULTS.horizontal}px`),
+									'--termsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(termsPadding?.left, DEFAULTS.termsPadding.left),
+									'--termsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(termsPadding?.right, DEFAULTS.termsPadding.right),
 								} : {
 									'--descriptionsFontStyle': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsFontStyle,
 									'--descriptionsFontWeight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsFontWeight,
 									'--descriptionsFontSize': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsFontSize,
 									'--descriptionsColor': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsColor,
-									'--descriptionsMarginTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsMargin?.top,
-									'--descriptionsMarginBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsMargin?.bottom,
-									'--descriptionsMarginLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsMargin?.left,
-									'--descriptionsMarginRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsMargin?.right,
-									'--descriptionsMarginInlineStart': (styleRegular || /is-style-grid/.test(blockProps.className)) && (0 <= indent ? `${indent}%` : undefined),
-									'--descriptionsPaddingTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.top,
-									'--descriptionsPaddingBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && `${horizontal}px`,
-									'--descriptionsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.left,
-									'--descriptionsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.right,
+									'--descriptionsMarginTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(descriptionsMargin?.top, DEFAULTS.descriptionsMargin.top),
+									'--descriptionsMarginBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(descriptionsMargin?.bottom, DEFAULTS.descriptionsMargin.bottom),
+									'--descriptionsMarginLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(descriptionsMargin?.left, DEFAULTS.descriptionsMargin.left),
+									'--descriptionsMarginRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(descriptionsMargin?.right, DEFAULTS.descriptionsMargin.right),
+									'--descriptionsMarginInlineStart': (styleRegular || /is-style-grid/.test(blockProps.className)) && (0 <= indent ? unlessDefault(`${indent}%`, `${DEFAULTS.indent}%`) : undefined),
+									'--descriptionsPaddingTop': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(descriptionsPadding?.top, DEFAULTS.descriptionsPadding.top),
+									'--descriptionsPaddingBottom': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(`${horizontal}px`, `${DEFAULTS.horizontal}px`),
+									'--descriptionsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(descriptionsPadding?.left, DEFAULTS.descriptionsPadding.left),
+									'--descriptionsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && unlessDefault(descriptionsPadding?.right, DEFAULTS.descriptionsPadding.right),
 								}
 							})}
 							value={content}
@@ -105,7 +133,7 @@ export default function save({ attributes }) {
 
 	return (
 		<dl {...useBlockProps.save({ className })}
-			style={/is-style-grid/.test(blockProps.className) ? { '--gridTemplateColumns': `${spacing}% 2fr` } : undefined}
+			style={/is-style-grid/.test(blockProps.className) ? cssVars({ '--gridTemplateColumns': unlessDefault(`${spacing}% 2fr`, `${DEFAULTS.spacing}% 2fr`) }) : undefined}
 		>
 			<Section rows={list} />
 		</dl>
