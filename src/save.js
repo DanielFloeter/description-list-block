@@ -4,6 +4,28 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import clsx from 'clsx';
 
+/**
+ * Removes empty values from a style object.
+ *
+ * Conditional expressions like `condition && value` evaluate to the boolean
+ * `false` when the condition is not met. The WordPress element serializer only
+ * skips `null` and `undefined`, so such a value would be written to the saved
+ * markup as `--someProperty:false`. Filtering keeps the markup clean.
+ *
+ * @param {Object} vars Style object, possibly containing empty values.
+ * @return {Object} Style object without empty values.
+ */
+const cssVars = (vars) =>
+	Object.fromEntries(
+		Object.entries(vars).filter(
+			([, value]) =>
+				value !== undefined &&
+				value !== null &&
+				value !== false &&
+				value !== ''
+		)
+	);
+
 export default function save({ attributes }) {
 	const {
 		termsFontStyle,
@@ -43,7 +65,7 @@ export default function save({ attributes }) {
 						<RichText.Content
 							tagName={tag}
 							key={rowIndex}
-							style={{
+							style={cssVars({
 								...(tag === 'dt') ? {
 									'--termsFontStyle': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsFontStyle,
 									'--termsFontWeight': (styleRegular || /is-style-grid/.test(blockProps.className)) && termsFontWeight,
@@ -72,7 +94,7 @@ export default function save({ attributes }) {
 									'--descriptionsPaddingLeft': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.left,
 									'--descriptionsPaddingRight': (styleRegular || /is-style-grid/.test(blockProps.className)) && descriptionsPadding?.right,
 								}
-							}}
+							})}
 							value={content}
 						/>
 					);
@@ -83,10 +105,9 @@ export default function save({ attributes }) {
 
 	return (
 		<dl {...useBlockProps.save({ className })}
-			style={/is-style-grid/.test(blockProps.className) && { '--gridTemplateColumns': `${spacing}% 2fr` }}
+			style={/is-style-grid/.test(blockProps.className) ? { '--gridTemplateColumns': `${spacing}% 2fr` } : undefined}
 		>
 			<Section rows={list} />
 		</dl>
 	);
 }
-
