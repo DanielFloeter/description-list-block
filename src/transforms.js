@@ -421,6 +421,25 @@ const transforms = {
 				} ),
 		},
 		{
+			// Paragraphs -> Description List Block.
+			type: 'block',
+			blocks: [ 'core/paragraph' ],
+			isMultiBlock: true,
+			isMatch: ( attributes ) =>
+				attributes.some( ( { content } ) =>
+					String( content ?? '' ).trim()
+				),
+			transform: ( attributes ) =>
+				createBlock( name, {
+					list: itemsToList(
+						attributes.map( ( { content } ) => ( {
+							content: String( content ?? '' ),
+							children: [],
+						} ) )
+					),
+				} ),
+		},
+		{
 			// Pasted `<dl>` markup -> Description List Block.
 			type: 'raw',
 			isMatch: isDescriptionList,
@@ -460,6 +479,24 @@ const transforms = {
 					anchor ? { anchor } : {},
 					listToItems( list )
 				),
+		},
+		{
+			// Description List Block -> Paragraphs.
+			type: 'block',
+			blocks: [ 'core/paragraph' ],
+			transform: ( { list = [] } ) => {
+				const paragraphs = list
+					.filter( ( { content } ) => String( content ?? '' ).trim() )
+					.map( ( { content } ) =>
+						createBlock( 'core/paragraph', {
+							content: String( content ),
+						} )
+					);
+
+				return paragraphs.length
+					? paragraphs
+					: createBlock( 'core/paragraph' );
+			},
 		},
 	],
 };
