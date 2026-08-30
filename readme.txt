@@ -3,7 +3,7 @@ Contributors:      kometschuh
 Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              block, description list, definition list, gutenberg, list
 Requires at least: 5.6
-Tested up to:      6.5
+Tested up to:      7.1
 Stable tag:        1.2.5
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
@@ -27,6 +27,7 @@ We're [Tip Top Press](http://tiptoppress.com/) and create Gutenberg Blocks for W
 * Insert a new term (`<dt>`) and description (`<dd>`) after selection
 * Delete the selcted term (`<dt>`) and description (`<dd>`) pair
 * Access via Shortcuts
+* Transform an Individual HTML block or a list into a description list and back
 
 = Contribute =
 While using this plugin if you find any bug or any conflict, please submit an issue at [Github](https://github.com/DanielFloeter/description-list-block) (If possible with a pull request).
@@ -57,6 +58,11 @@ Just use or add also pairs (`<dt>`, `<dd>`) and leave the `<dt>` element empty.
 6. Seperate Term (dt) and Description (dd) settings
 
 == Changelog ==
+
+= 1.3.0 - August 30th 2026 =
+* Transform an Individual HTML block into a description list and back
+* Transform a list into a description list and back
+* Paste description list markup as a description list
 
 = 1.2.5 - Juni 29th 2024 =
 * Wrong icon

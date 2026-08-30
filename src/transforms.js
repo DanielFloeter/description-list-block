@@ -229,6 +229,168 @@ function toHTML( { list = [], anchor } ) {
 	return `<dl${ anchor ? ` id="${ anchor }"` : '' }>\n${ rows }\n</dl>`;
 }
 
+/**
+ * Reads the items of a list block, together with the items of a nested list.
+ *
+ * @param {Array} blocks Inner blocks of a list block.
+ *
+ * @return {Array} List of `{ content, children }` items.
+ */
+function getListItems( blocks ) {
+	return ( blocks || [] )
+		.filter( ( block ) => 'core/list-item' === block?.name )
+		.map( ( block ) => ( {
+			content: String( block.attributes?.content ?? '' ),
+			children: ( block.innerBlocks || [] ).reduce(
+				( items, inner ) =>
+					'core/list' === inner?.name
+						? [ ...items, ...getListItems( inner.innerBlocks ) ]
+						: items,
+				[]
+			),
+		} ) );
+}
+
+/**
+ * Reads the items of a list block of the first version, where the items were
+ * stored as markup in the `values` attribute.
+ *
+ * @param {string} values Markup of the list items.
+ *
+ * @return {Array} List of `{ content, children }` items.
+ */
+function getLegacyListItems( values ) {
+	const body = parseBody( `<ul>${ values }</ul>` );
+
+	if ( ! body ) {
+		return [];
+	}
+
+	return Array.from( body.querySelectorAll( ':scope > ul > li' ) ).map(
+		( item ) => {
+			const clone = item.cloneNode( true );
+			const nested = Array.from(
+				clone.querySelectorAll( ':scope > ul > li, :scope > ol > li' )
+			).map( ( child ) => ( {
+				content: child.innerHTML.trim(),
+				children: [],
+			} ) );
+
+			Array.from( clone.querySelectorAll( ':scope > ul, :scope > ol' ) ).forEach(
+				( list ) => list.remove()
+			);
+
+			return { content: clone.innerHTML.trim(), children: nested };
+		}
+	);
+}
+
+/**
+ * Returns the items of a list block, whatever version it is.
+ *
+ * @param {Object} attributes  Attributes of the list block.
+ * @param {Array}  innerBlocks Inner blocks of the list block.
+ *
+ * @return {Array} List of `{ content, children }` items.
+ */
+function getItems( attributes, innerBlocks ) {
+	const items = getListItems( innerBlocks );
+
+	if ( items.length ) {
+		return items;
+	}
+
+	return 'string' === typeof attributes?.values
+		? getLegacyListItems( attributes.values )
+		: [];
+}
+
+/**
+ * Turns the items of a list block into the `list` attribute of this block.
+ *
+ * An item holding a nested list becomes a term, the items of the nested list
+ * become its descriptions. A list without any nesting alternates instead, so
+ * the first item becomes a term, the second one its description and so on.
+ *
+ * @param {Array} items List items.
+ *
+ * @return {Array} List of `{ content, tag }` pairs.
+ */
+function itemsToList( items ) {
+	const nested = items.some( ( item ) => item.children.length );
+
+	const list = nested
+		? items.reduce( ( pairs, item ) => {
+				pairs.push( { content: item.content, tag: 'dt' } );
+
+				if ( ! item.children.length ) {
+					pairs.push( { content: '', tag: 'dd' } );
+					return pairs;
+				}
+
+				item.children.forEach( ( child ) =>
+					pairs.push( { content: child.content, tag: 'dd' } )
+				);
+
+				return pairs;
+		  }, [] )
+		: items.map( ( item, index ) => ( {
+				content: item.content,
+				tag: index % 2 ? 'dd' : 'dt',
+		  } ) );
+
+	// The block works with pairs, so a lonely term gets an empty description.
+	if ( 'dt' === list[ list.length - 1 ]?.tag ) {
+		list.push( { content: '', tag: 'dd' } );
+	}
+
+	return list;
+}
+
+/**
+ * Turns the `list` attribute of this block into list items.
+ *
+ * A term becomes an item, its descriptions become the items of a nested list.
+ *
+ * @param {Array} list List of `{ content, tag }` pairs.
+ *
+ * @return {Array} List item blocks.
+ */
+function listToItems( list = [] ) {
+	const items = [];
+
+	list.forEach( ( { content, tag } ) => {
+		const value = String( content ?? '' );
+
+		if ( 'dt' === tag || ! items.length ) {
+			items.push( { content: value, children: [] } );
+			return;
+		}
+
+		items[ items.length - 1 ].children.push( value );
+	} );
+
+	return items.map( ( item ) => {
+		const children = item.children.filter( ( child ) => child.trim() );
+
+		return createBlock(
+			'core/list-item',
+			{ content: item.content },
+			children.length
+				? [
+						createBlock(
+							'core/list',
+							{},
+							children.map( ( child ) =>
+								createBlock( 'core/list-item', { content: child } )
+							)
+						),
+				  ]
+				: []
+		);
+	} );
+}
+
 const transforms = {
 	from: [
 		{
@@ -245,6 +407,18 @@ const transforms = {
 				splitHTML( getSourceHTML( block?.attributes, block ) ),
 			transform: ( attributes ) =>
 				splitHTML( getSourceHTML( attributes ) ),
+		},
+		{
+			// List block -> Description List Block.
+			type: 'block',
+			blocks: [ 'core/list' ],
+			isMatch: ( attributes, block ) =>
+				getItems( attributes, block?.innerBlocks ).length > 0,
+			transform: ( attributes, innerBlocks ) =>
+				createBlock( name, {
+					list: itemsToList( getItems( attributes, innerBlocks ) ),
+					...( attributes?.anchor ? { anchor: attributes.anchor } : {} ),
+				} ),
 		},
 		{
 			// Pasted `<dl>` markup -> Description List Block.
@@ -275,6 +449,17 @@ const transforms = {
 			blocks: [ 'core/html' ],
 			transform: ( attributes ) =>
 				createBlock( 'core/html', { content: toHTML( attributes ) } ),
+		},
+		{
+			// Description List Block -> List block.
+			type: 'block',
+			blocks: [ 'core/list' ],
+			transform: ( { list, anchor } ) =>
+				createBlock(
+					'core/list',
+					anchor ? { anchor } : {},
+					listToItems( list )
+				),
 		},
 	],
 };
