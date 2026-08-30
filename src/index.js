@@ -4,6 +4,7 @@ import { __, _x } from '@wordpress/i18n';
 import deprecated from './deprecated';
 import Edit from './edit';
 import Save from './save';
+import transforms from './transforms';
 
 import metadata from './block.json';
 const { name } = metadata;
@@ -71,5 +72,6 @@ registerBlockType(name, {
     ],
     edit: Edit,
     save: Save,
+    transforms,
     deprecated,
 });
