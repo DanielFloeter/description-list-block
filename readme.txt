@@ -4,7 +4,7 @@ Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              description list, definition list, glossary, faq, dictionary
 Requires at least: 6.6
 Tested up to:      7.1
-Stable tag:        1.3.0
+Stable tag:        1.3.1
 Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -82,6 +82,9 @@ Add term and description pairs (`<dt>`, `<dd>`) as usual and leave the `<dt>` el
 6. Separate typography and color settings for terms (dt) and descriptions (dd).
 
 == Changelog ==
+
+= 1.3.1 - October 22nd 2026 =
+* Translation and dependencies update
 
 = 1.3.0 - August 30th 2026 =
 * Transform a Custom HTML block into a description list and back

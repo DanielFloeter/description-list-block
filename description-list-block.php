@@ -3,7 +3,7 @@
  * Plugin Name:     Description List Block
  * Plugin URI:      https://wordpress.org/plugins/description-list-block/
  * Description:     Description list (also known as definition list) block for glossaries, FAQs and specs using semantic dl, dt and dd HTML.
- * Version:         1.3.0
+ * Version:         1.3.1
  * Author:          TipTopPress
  * Author URI:      https://tiptoppress.com
  * Requires at least: 6.6
