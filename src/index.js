@@ -1,5 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __, _x } from '@wordpress/i18n';
+import { addFilter } from '@wordpress/hooks';
 
 import deprecated from './deprecated';
 import Edit from './edit';
@@ -9,21 +10,32 @@ import transforms from './transforms';
 import metadata from './block.json';
 const { name } = metadata;
 
+// Fall back to the WordPress core translation when the plugin has none for a string.
+addFilter(
+    'i18n.gettext_description-list-block',
+    'description-list-block/fallback-to-core',
+    (translation, text) => (translation === text ? __(text) : translation)
+);
+
 registerBlockType(name, {
     ...metadata,
     description: __(
-        'Displays a description list using the dl element consist of a series of term and description pairs (dt, dd).',
+        'Description list (also known as definition list) block for glossaries, FAQs and specs using semantic dl, dt and dd HTML.',
         'description-list-block'
     ),
     keywords: [
-        __('dl'),
-        __('dt'),
-        __('dd'),
-        __('description'),
-        __('definition'),
-        __('list'),
-        __('dictionary'),
-        __('tiptoppress'),
+        'dl',
+        'dt',
+        'dd',
+        __('description', 'description-list-block'),
+        __('definition', 'description-list-block'),
+        __('list', 'description-list-block'),
+        __('dictionary', 'description-list-block'),
+        __('glossary', 'description-list-block'),
+        __('faq', 'description-list-block'),
+        __('term', 'description-list-block'),
+        __('specs', 'description-list-block'),
+        'tiptoppress',
     ],
     example: {
         attributes: {

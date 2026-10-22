@@ -1,7 +1,7 @@
 === Description List Block ===
 Contributors:      kometschuh
 Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
-Tags:              block, description list, definition list, gutenberg, list
+Tags:              description list, definition list, glossary, faq, list
 Requires at least: 5.6
 Tested up to:      7.1
 Stable tag:        1.3.0
@@ -9,11 +9,13 @@ Requires PHP:      7.0.0
 License:           GPL-2.0-or-later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 
-Displays a description list using the dl element consist of a series of term and description pairs (dt, dd).
+Description list (also known as definition list) block for glossaries, FAQs and specs using semantic dl, dt and dd HTML.
 
 == Description ==
 
 Displays a description list or definition list using the `<dl>` element consist of a series of term and description pairs (`<dt>`, `<dd>`) and displays that elements in definition form like a dictionary in the Gutenberg block editor.
+
+Use it for glossaries, FAQs, product specs or metadata.
 
 = Tip Top Press =
 We're [Tip Top Press](http://tiptoppress.com/) and create Gutenberg Blocks for Wordpress. If you want to know about what we're working on and you are interested in backgrounds then you can read all newes storys on our [blog](http://tiptoppress.com/blog/?utm_source=wp.org&utm_medium=readme.txt&utm_campaign=description+list+block).

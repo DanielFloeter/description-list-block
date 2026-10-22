@@ -63,8 +63,8 @@ export default function Edit({ attributes, setAttributes }) {
 	const [initialRowCount, setInitialRowCount] = useState(2);
 	const [selectedCell, setSelectedCell] = useState();
 	const placeholder = {
-		dt: __('Term ...'),
-		dd: __('Description ...'),
+		dt: __('Term ...', 'description-list-block'),
+		dd: __('Description ...', 'description-list-block'),
 	};
 
 	/**
@@ -224,19 +224,19 @@ export default function Edit({ attributes, setAttributes }) {
 	const tableControls = [
 		{
 			icon: tableRowBefore,
-			title: __('Insert before'),
+			title: __('Insert before', 'description-list-block'),
 			isDisabled: !selectedCell,
 			onClick: onInsertListPairBefore,
 		},
 		{
 			icon: tableRowAfter,
-			title: __('Insert after'),
+			title: __('Insert after', 'description-list-block'),
 			isDisabled: !selectedCell,
 			onClick: onInsertListPairAfter,
 		},
 		{
 			icon: tableRowDelete,
-			title: __('Delete selected'),
+			title: __('Delete selected', 'description-list-block'),
 			isDisabled: !selectedCell,
 			onClick: onDeleteListPair,
 		},
@@ -246,22 +246,22 @@ export default function Edit({ attributes, setAttributes }) {
 
 	const fontSizes = [
 		{
-			name: __('Small'),
+			name: __('Small', 'description-list-block'),
 			slug: 'small',
 			size: '18px',
 		},
 		{
-			name: __('Normal'),
+			name: __('Normal', 'description-list-block'),
 			slug: 'normal',
 			size: '21px',
 		},
 		{
-			name: __('Large'),
+			name: __('Large', 'description-list-block'),
 			slug: 'large',
 			size: '26px',
 		},
 		{
-			name: __('Huge'),
+			name: __('Huge', 'description-list-block'),
 			slug: 'huge',
 			size: '32px',
 		},
@@ -304,7 +304,7 @@ export default function Edit({ attributes, setAttributes }) {
 			{(styleRegular || /is-style-grid/.test(blockProps.className)) && (
 				<InspectorControls>
 					{isOneSelected && (
-						<PanelBody title={__('Settings')}>
+						<PanelBody title={__('Settings', 'description-list-block')}>
 							{(styleRegular) && (
 								<RangeControl
 									label="Indent"
@@ -339,7 +339,7 @@ export default function Edit({ attributes, setAttributes }) {
 							/>
 						</PanelBody>
 					)}
-					<PanelBody title={__('Term')}>
+					<PanelBody title={__('Term', 'description-list-block')}>
 						<FontSizePicker
 							fontSizes={fontSizes}
 							value={termsFontSize}
@@ -373,7 +373,7 @@ export default function Edit({ attributes, setAttributes }) {
 							resetValues={{ top: '0px', right: '0px', bottom: '0px', left: '0px' }}
 						/> */}
 					</PanelBody>
-					<PanelBody title={__('Description')}>
+					<PanelBody title={__('Description', 'description-list-block')}>
 						<FontSizePicker
 							fontSizes={fontSizes}
 							value={descriptionsFontSize}
@@ -426,7 +426,7 @@ export default function Edit({ attributes, setAttributes }) {
 										hasArrowIndicator
 										icon={"welcome-add-page"}
 										toggleProps={toggleProps}
-										label={__('Edit description list')}
+										label={__('Edit description list', 'description-list-block')}
 										controls={tableControls}
 									/>
 								)}
@@ -511,9 +511,9 @@ export default function Edit({ attributes, setAttributes }) {
 				)}
 				{isEmpty && (
 					<Placeholder
-						label={__('Description List')}
+						label={__('Description List', 'description-list-block')}
 						icon={<BlockIcon icon="clipboard" showColors />}
-						instructions={__('Insert a description list for sharing data.')}
+						instructions={__('Insert a description list for sharing data.', 'description-list-block')}
 					>
 						<form
 							className="blocks-table__placeholder-form"
@@ -521,7 +521,7 @@ export default function Edit({ attributes, setAttributes }) {
 						>
 							<TextControl
 								type="number"
-								label={__('dt/dd pair count')}
+								label={__('dt/dd pair count', 'description-list-block')}
 								value={initialRowCount}
 								onChange={onChangeInitialRowCount}
 								min="1"
@@ -532,7 +532,7 @@ export default function Edit({ attributes, setAttributes }) {
 								isPrimary
 								type="submit"
 							>
-								{__('Create a Description List')}
+								{__('Create a Description List', 'description-list-block')}
 							</Button>
 						</form>
 					</Placeholder>
