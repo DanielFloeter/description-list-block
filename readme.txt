@@ -2,7 +2,7 @@
 Contributors:      kometschuh
 Donate link:       https://www.paypal.com/donate/?hosted_button_id=RSR28JGA4M7JC
 Tags:              description list, definition list, glossary, faq, list
-Requires at least: 5.6
+Requires at least: 6.6
 Tested up to:      7.1
 Stable tag:        1.3.0
 Requires PHP:      7.0.0

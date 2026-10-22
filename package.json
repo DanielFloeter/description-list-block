@@ -14,11 +14,11 @@
         "packages-update": "wp-scripts packages-update"
     },
     "dependencies": {
-        "@wordpress/icons": "^9.49.0",
-        "lodash": "^4.17.21",
-        "clsx": "^2.1.1"
+        "@wordpress/icons": "^19.0.0",
+        "clsx": "^2.1.1",
+        "lodash": "^4.18.1"
     },
     "devDependencies": {
-        "@wordpress/scripts": "^26.18.0"
+        "@wordpress/scripts": "^37.0.0"
     }
 }
