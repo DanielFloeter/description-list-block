@@ -5,14 +5,21 @@
         "php": "8.2",
         "wp": "latest"
     },
-    "phpExtensionBundles": [
-        "kitchen-sink"
-    ],
     "steps": [
         {
             "step": "login",
             "username": "admin",
             "password": "password"
+        },
+        {
+            "step": "installPlugin",
+            "pluginData": {
+                "resource": "wordpress.org/plugins",
+                "slug": "description-list-block"
+            },
+            "options": {
+                "activate": true
+            }
         },
         {
             "step": "setSiteOptions",

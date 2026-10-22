@@ -5,7 +5,7 @@
  * Description:     Description list (also known as definition list) block for glossaries, FAQs and specs using semantic dl, dt and dd HTML.
  * Version:         1.3.0
  * Author:          TipTopPress
- * Author URI:      http://tiptoppress.com
+ * Author URI:      https://tiptoppress.com
  * Requires at least: 6.6
  * Requires PHP:      7.0
  * License:         GPL-2.0-or-later
